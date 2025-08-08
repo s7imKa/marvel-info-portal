@@ -1,11 +1,12 @@
-import './App.css'
+import "./App.css";
+import AppHeader from '../components/appHeader/AppHeader';
 
 function App() {
-	return (
-		<>
-			<h1> Marvel info portal </h1>
-		</>
-	)
+  return (
+    <>
+
+    </>
+  );
 }
 
-export default App
+export default App;

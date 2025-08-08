@@ -5,7 +5,11 @@
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+
+	/*background-image: linear-gradient(135deg, #00ACC1, #006064);*/
+
+	/*background-image: linear-gradient(135deg, #E1F5FE, #81D4FA);*/
+	/*color: #01579B; !* темно-синій текст *!*/
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
