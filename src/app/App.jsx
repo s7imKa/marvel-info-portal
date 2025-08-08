@@ -1,12 +1,18 @@
-import "./App.css";
-import AppHeader from '../components/appHeader/AppHeader';
+import AppHeader from '../components/appHeader/appHeader'
+import RandomChar from '../components/randomChar/randomChar'
+
+import './App.css'
 
 function App() {
-  return (
-    <>
+	return (
+		<div className='app'>
+			<AppHeader />
+			<main>
+				<RandomChar/>
 
-    </>
-  );
+			</main>
+		</div>
+	)
 }
 
-export default App;
+export default App

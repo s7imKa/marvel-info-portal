@@ -1,0 +1,17 @@
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #8B0000; /* темно-червоний */
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: #b30000; /* світліший червоний при ховері */
+}
