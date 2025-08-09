@@ -13,7 +13,6 @@
 	font-size: 24px;
 	font-weight: 700;
 	color: black;
-	padding-left: 100px;
 }
 
 .header-logo a {
@@ -27,7 +26,6 @@
 
 .header-menu {
 	text-decoration: none;
-	padding-right: 100px;
 	color: black;
 }
 

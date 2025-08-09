@@ -4,4 +4,9 @@
 	/* Primary Colors */
 	--marvel-red: rgba(159, 0, 19, 1);
 
+	--background-grey: rgba(35, 34, 34, 1);
+
+	--text: white;
+
+	--button-grey: rgba(92, 92, 92, 1);
 }

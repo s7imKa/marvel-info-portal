@@ -6,6 +6,8 @@
 		sans-serif;
 
 	color: rgba(255, 255, 255, 0.87);
+	line-height: 1.3; /* 1.5 × розмір шрифту */
+	font-stretch: 50%; /* або відсотки: 80% */
 
 	/*background-image: linear-gradient(135deg, #00ACC1, #006064);*/
 

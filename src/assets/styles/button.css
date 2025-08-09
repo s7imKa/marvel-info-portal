@@ -1,17 +1,19 @@
 .button {
     display: inline-block;
-    padding: 8px 16px;
-    background-color: #8B0000; /* темно-червоний */
-    color: #fff;
+    padding: 13px 0;
+    min-width: 101px;
+    background-color: var(--marvel-red); /* темно-червоний */
+    color: var(--text);
     text-transform: uppercase;
     font-weight: bold;
     font-size: 12px;
     border: none;
     cursor: pointer;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+    /* зрізаний верхній лівий і нижній правий */
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
     transition: background-color 0.2s ease-in-out;
 }
 
 .button:hover {
-    background-color: #b30000; /* світліший червоний при ховері */
+    background-color: var(--button-grey); /*світліший червоний при ховері */
 }
