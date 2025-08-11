@@ -1,19 +1,36 @@
 .button {
-    display: inline-block;
-    padding: 13px 0;
-    min-width: 101px;
-    background-color: var(--marvel-red); /* темно-червоний */
-    color: var(--text);
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 12px;
-    border: none;
-    cursor: pointer;
-    /* зрізаний верхній лівий і нижній правий */
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-    transition: background-color 0.2s ease-in-out;
+	display: inline-block;
+	padding: 13px 10px;
+	min-width: 101px;
+	background-color: var(--marvel-red); /* темно-червоний */
+	color: var(--text);
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 500;
+	font-size: 12px;
+	border: none;
+	cursor: pointer;
+	/* зрізаний верхній лівий і нижній правий */
+	clip-path: polygon(
+		10px 0,
+		100% 0,
+		100% calc(100% - 10px),
+		calc(100% - 10px) 100%,
+		0 100%,
+		0 10px
+	);
+	transition: background-color 0.2s ease-in-out;
+	text-decoration: none;
 }
 
 .button:hover {
-    background-color: var(--button-grey); /*світліший червоний при ховері */
+	background-color: var(--button-grey); /*світліший червоний при ховері */
+}
+
+.button-darck {
+	background-color: var(--button-grey); /* темно-червоний */
+}
+
+.button-darck:hover {
+	background-color: var(--marvel-red); /* темно-червоний */
 }

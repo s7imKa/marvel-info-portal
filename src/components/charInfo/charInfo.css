@@ -1,0 +1,60 @@
+.char--info {
+	width: 40%;
+	height: 100%;
+	margin-left: 20px;
+	padding: 20px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.333);
+}
+
+.char--basics {
+	width: 100%;
+	height: 150px;
+	display: flex;
+}
+
+.char--info img {
+	width: 150px;
+}
+
+.char--info-content {
+	width: 200px;
+	margin-left: 20px;
+	text-align: left;
+	display: flex; /* робимо flex-контейнер */
+	flex-direction: column; /* вертикальне розташування */
+	flex: 1; /* займає всю доступну висоту */
+}
+
+.char--info-content h2 {
+	margin: 0;
+	margin-bottom: auto;
+	color: black;
+}
+
+.char--info p {
+	color: black;
+	font-style: 14px;
+}
+
+.char-comics {
+	color: black;
+	font-style: 18px;
+	margin: 10px 0;
+}
+
+.char-comics-list {
+	color: black;
+	text-decoration: none;
+	padding: 0;
+}
+
+.char-comics-item {
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+	list-style: none;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.212);
+	border-radius: 3px;
+	padding: 4px 10px;
+	margin: 10px 0;
+}

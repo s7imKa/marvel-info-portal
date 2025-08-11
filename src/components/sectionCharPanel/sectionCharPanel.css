@@ -1,0 +1,12 @@
+.section-char-panel {
+	margin-top: 30px;
+	display: flex;
+	position: relative;
+}
+
+.bg-img {
+	position: absolute;
+	bottom: 0;
+	right: -100px;
+	z-index: -1;
+}

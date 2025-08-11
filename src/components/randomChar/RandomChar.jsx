@@ -18,10 +18,12 @@ export default function RandomChar() {
 						oafish imbecile, he's quite smart and compassionate...
 					</p>
 					<div className='button-char-info'>
-						<button className='button'>HOMEPAGE</button>
-						<button style={{ backgroundColor: 'var(--button-grey)'}} className='button'>
-							WIKI
-						</button>
+						<a href='#' className='button'>
+							<div className='inner'>HOMEPAGE</div>
+						</a>
+						<a href='#' className='button button-darck'>
+							<div className='inner'> WIKI</div>
+						</a>
 					</div>
 				</div>
 			</div>
