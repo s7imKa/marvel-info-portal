@@ -1,25 +1,28 @@
 class MarvelService {
-  getResource = async (url) => {
-    let res = await fetch(url);
+	_apiBase = 'https://marvel-server-zeta.vercel.app/'
+	_apiKey = 'apikey=d4eecb0c66dedbfae4eab45d312fc1df'
 
-    if (!res.ok) {
-      throw new Error(`cloud not fetch ${url}, status: ${res.status}`);
-    }
+	getResource = async url => {
+		let res = await fetch(url)
 
-    return await res.json();
-  };
+		if (!res.ok) {
+			throw new Error(`cloud not fetch ${url}, status: ${res.status}`)
+		}
 
-  getAllCharacters = () => {
-    return this.getResource(" https://gateway.marvel.com/docs/public");
-  };
+		return await res.json()
+	}
 
-  getCharacters = (id) => {
-    return this.getResource(
-      ` https://gateway.marvel.com/v1/public/characters/${id}?ts=1&apikey=eb9d5baa173858a51226c74b6f887a7b&hash=0479e542fd2b549ba15c2abfc4f414e4 `,
-    );
-  };
+	getAllCharacters = () => {
+		return this.getResource(`${this._apiBase}characters?${this._apiKey}`)
+	}
+
+	getCharacters = id => {
+		return this.getResource(
+			`https://marvel-server-zeta.vercel.app/characters/${id}?apikey=d4eecb0c66dedbfae4eab45d312fc1df`
+		)
+	}
 }
 
-export default MarvelService;
+export default MarvelService
 
 // https://gateway.marvel.com/docs/public
