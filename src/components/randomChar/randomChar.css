@@ -3,7 +3,7 @@
 	width: 100%;
 	display: flex;
 	color: black;
-	box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.233);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.291);
 }
 
 .char-info {
@@ -47,7 +47,9 @@
 	color: var(--text);
 	display: flex;
 	padding: 35px;
+	box-shadow: -15px 0 15px rgba(0, 0, 0, 0.291);
 }
+
 
 .char-random .mjolnir {
 	z-index: 1;

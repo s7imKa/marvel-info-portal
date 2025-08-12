@@ -1,6 +1,8 @@
 import './appHeader.css'
 
-export default function AppHeader() {
+export default function AppHeader({ changePage, stateButton }) {
+	const pagesButton = ['Characters', 'Comics']
+
 	return (
 		<header className='app-header'>
 			<h1 className='header-logo'>
@@ -10,15 +12,20 @@ export default function AppHeader() {
 			</h1>
 			<nav className='header-menu'>
 				<ul>
-					<li>
-						<a href='#'>
-							<span>Characters</span>
-						</a>
-					</li>
-					/
-					<li>
-						<a href='#'>Comics</a>
-					</li>
+					{pagesButton.map((item, index) => (
+						<li key={index}>
+							<a
+								href='#'
+								className={stateButton === item ? 'active' : ''}
+								onClick={e => {
+									e.preventDefault()
+									changePage(item)
+								}}
+							>
+								{item}
+							</a>
+						</li>
+					))}
 				</ul>
 			</nav>
 		</header>

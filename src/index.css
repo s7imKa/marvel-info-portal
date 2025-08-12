@@ -9,10 +9,10 @@
 	line-height: 1.3; /* 1.5 × розмір шрифту */
 	font-stretch: 50%; /* або відсотки: 80% */
 
-	/*background-image: linear-gradient(135deg, #00ACC1, #006064);*/
+	/* background-image: linear-gradient(135deg, #00ACC1, #006064); */
 
-	/*background-image: linear-gradient(135deg, #E1F5FE, #81D4FA);*/
-	/*color: #01579B; !* темно-синій текст *!*/
+	/* background-image: linear-gradient(135deg, #E1F5FE, #81D4FA); */
+	/* color: #01579B;  */
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;

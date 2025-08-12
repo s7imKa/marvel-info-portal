@@ -1,21 +1,29 @@
 import AppHeader from '../components/layout/appHeader/AppHeader'
-// import RandomChar from '../components/randomChar/RandomChar'
-// import SectionCharPanel from '../components/sectionCharPanel/SectionCharPanel'
+import RandomChar from '../components/randomChar/RandomChar'
+import SectionCharPanel from '../components/sectionCharPanel/SectionCharPanel'
 
+import { useState } from 'react'
 import { SectionComicsPanel } from '../components/sectionComicsPanel/sectionComicsPanel'
-
 import './App.css'
 
 function App() {
+	const [pagesNav, setPagesNav] = useState('Characters')
+
+	const changePage = value => {
+		setPagesNav(value)
+	}
+
 	return (
 		<div className='app'>
-			<AppHeader />
+			<AppHeader changePage={changePage} stateButton={pagesNav} />
 			<main>
-				{/* <RandomChar/>
-				<SectionCharPanel/> */}
-
-				<SectionComicsPanel/>
-
+				{pagesNav === 'Characters' && (
+					<>
+						<RandomChar />
+						<SectionCharPanel />
+					</>
+				)}
+				{pagesNav === 'Comics' && <SectionComicsPanel />}
 			</main>
 		</div>
 	)
