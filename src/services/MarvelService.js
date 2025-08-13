@@ -12,14 +12,29 @@ class MarvelService {
 		return await res.json()
 	}
 
-	getAllCharacters = () => {
-		return this.getResource(`${this._apiBase}characters?${this._apiKey}`)
+	getAllCharacters = async () => {
+		const res = await this.getResource(`${this._apiBase}characters?${this._apiKey}`)
+		return res.data.results.map(CharacterData => this._transformCharacters(CharacterData))
 	}
 
-	getCharacters = id => {
-		return this.getResource(
-			`https://marvel-server-zeta.vercel.app/characters/${id}?apikey=d4eecb0c66dedbfae4eab45d312fc1df`
-		)
+	getCharacters = async id => {
+		const res = await this.getResource(`${this._apiBase}characters/${id}?${this._apiKey}`)
+		return this._transformCharacters(res.data.results[0])
+	}
+
+	_transformCharacters = char => {
+		const description =
+			char.description && char.description.length >= 100
+				? char.description.slice(0, 200) + '...'
+				: char.description || 'not description'
+
+		return {
+			name: char.name,
+			description: description,
+			thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
+			homepage: char.urls[0].url,
+			wiki: char.urls[1].url,
+		}
 	}
 }
 

@@ -14,6 +14,10 @@
 
 .char-info img {
 	width: 180px;
+	height: 180px; /* ДОДАТИ: фіксована висота для квадратного формату */
+	object-fit: cover; /* ДОДАТИ: обрізає зображення пропорційно */
+	object-position: top; /* ДОДАТИ: фокус на верхній частині (обличчя) */
+	border-radius: 2px; /* ДОДАТИ: заокруглені кути для естетики */
 }
 
 .char-info-content {
@@ -49,7 +53,6 @@
 	padding: 35px;
 	box-shadow: -15px 0 15px rgba(0, 0, 0, 0.291);
 }
-
 
 .char-random .mjolnir {
 	z-index: 1;
