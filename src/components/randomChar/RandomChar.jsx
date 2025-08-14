@@ -5,6 +5,7 @@ import shield from '../../assets/images/img-char-random-section/shield.png'
 
 import MarvelService from '../../services/MarvelService'
 import Loader from '../loader/Loader'
+import Error from '../error/Error'
 
 import '../../assets/styles/button.css'
 import './randomChar.css'
@@ -18,6 +19,7 @@ class RandomChar extends Component {
 	state = {
 		char: {}, // дані персонажа
 		loader: true, // стан завантаження
+		error: false,
 	}
 
 	marvelService = new MarvelService() // сервіс Marvel API
@@ -29,19 +31,34 @@ class RandomChar extends Component {
 		})
 	}
 
+	onError = () => {
+		this.setState({
+			error: true,
+			loader: false,
+		})
+	}
+
 	updataChar = () => {
-		const max = 20
+		const max = 25
 		const id = Math.floor(Math.random() * max) + 1 // випадковий id
-		this.marvelService.getCharacters(id).then(res => this.onCharLoaded(res)) // запит до API
+		this.marvelService
+			.getCharacters(id)
+			.then(res => this.onCharLoaded(res))
+			.catch(this.onError)
 	}
 
 	render() {
-		const { char, loader } = this.state
+		const { char, loader, error } = this.state
+		const errorView = error ? <Error /> : null
+		const loaderView = loader ? <Loader /> : null
+		const contentView = !(loader || error) ? <Char char={char} /> : null
 
 		return (
 			<section className='random-char-section'>
 				<div className='char-info'>
-					{loader ? <Loader /> : <Char char={char} />} {/* показує loader або персонажа */}
+					{errorView}
+					{loaderView}
+					{contentView}
 				</div>
 				<div className='char-random'>
 					<img className='mjolnir' src={mjolnir} alt='mjolnir' /> {/* картинка */}
