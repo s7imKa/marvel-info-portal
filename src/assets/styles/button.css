@@ -24,7 +24,7 @@
 }
 
 .button:hover {
-	transform: translateX(-2px) translateY(-4px);
+	transform:  translateY(-4px);
 	background-color: var(--button-grey); /*світліший червоний при ховері */
 }
 
@@ -33,6 +33,6 @@
 }
 
 .button-darck:hover {
-	transform: translateX(-2px) translateY(-4px);
+	transform:  translateY(-4px);
 	background-color: var(--marvel-red); /* темно-червоний */
 }

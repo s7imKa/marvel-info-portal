@@ -4,8 +4,8 @@ import mjolnir from '../../assets/images/img-char-random-section/mjolnir.png'
 import shield from '../../assets/images/img-char-random-section/shield.png'
 
 import MarvelService from '../../services/MarvelService'
-import Loader from '../loader/Loader'
 import Error from '../error/Error'
+import Loader from '../loader/Loader'
 
 import '../../assets/styles/button.css'
 import './randomChar.css'
@@ -13,7 +13,6 @@ import './randomChar.css'
 class RandomChar extends Component {
 	constructor(props) {
 		super(props)
-		this.updataChar() // одразу завантажує випадкового персонажа
 	}
 
 	state = {
@@ -24,10 +23,15 @@ class RandomChar extends Component {
 
 	marvelService = new MarvelService() // сервіс Marvel API
 
+	componentDidMount() {
+		this.updataChar()
+	}
+
 	onCharLoaded = char => {
 		this.setState({
 			char: char, // зберігаємо персонажа
 			loader: false, // вимикаємо loader
+			error: false, // ВАЖЛИВО: скидаємо помилку при успішному завантаженні
 		})
 	}
 
@@ -41,6 +45,13 @@ class RandomChar extends Component {
 	updataChar = () => {
 		const max = 25
 		const id = Math.floor(Math.random() * max) + 1 // випадковий id
+
+		// Скидаємо error стан при новому запиті
+		this.setState({
+			loader: true,
+			error: false,
+		})
+
 		this.marvelService
 			.getCharacters(id)
 			.then(res => this.onCharLoaded(res))
@@ -70,7 +81,9 @@ class RandomChar extends Component {
 						</h1>
 						<div className='button-random-car'>
 							<h1>Or choose another one</h1>
-							<button className='button'>TRY IT</button> {/* кнопка */}
+							<button className='button' onClick={this.updataChar} disabled={loader}>
+								{loader ? 'LOADING...' : 'TRY IT'}
+							</button>
 						</div>
 					</div>
 				</div>
