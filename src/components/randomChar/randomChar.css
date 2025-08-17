@@ -3,16 +3,18 @@
 	width: 100%;
 	display: flex;
 	color: black;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.291);
+	border-radius: 3px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.16);
 }
 
 .char-info {
+	border: 1px solid var(--background-grey);
 	width: 50%;
 	padding: 35px;
 	display: flex;
 }
 
-.char-info img {
+.char-info .thumbnail {
 	width: 180px;
 	height: 180px; /* ДОДАТИ: фіксована висота для квадратного формату */
 	object-fit: cover; /* ДОДАТИ: обрізає зображення пропорційно */
@@ -51,7 +53,7 @@
 	color: var(--text);
 	display: flex;
 	padding: 35px;
-	box-shadow: -15px 0 15px rgba(0, 0, 0, 0.291);
+	box-shadow: -5px 0 10px rgba(0, 0, 0, 0.291);
 }
 
 .char-random .mjolnir {

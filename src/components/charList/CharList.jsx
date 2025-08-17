@@ -1,65 +1,58 @@
-import abyss from '../../assets/images/char-item/abyss.jpg'
-import MarvelService from '../../services/MarvelService'
+import MarvelService from '../../services/MarvelService';
+import CharListItem from '../charListItem/CharListItem';
+import Error from '../error/Error';
+import Loader from '../loader/Loader';
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import './charList.css'
+import './charList.css';
 
 export const CharList = () => {
-	const [chars, setChars] = useState({
-		cahrs: {},
-		loader: true,
-		eror: false
-	})
+   const [charList, setCharList] = useState([]);
+   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(false);
 
-	const marvelService = new MarvelService()
+   useEffect(() => {
+      const marvelService = new MarvelService();
 
-	const getChars = () => {
-		marvelService.getAllCharacters()
-			.then(res => console.log(res))
-	}
+      const getChars = () => {
+         marvelService
+            .getAllCharacters()
+            .then((characters) => {
+               console.log(characters);
+               setCharList(characters);
+               setLoading(false);
+            })
+            .catch((err) => {
+               console.log(err);
+               setError(true);
+               setLoading(false);
+            });
+      };
+      getChars();
+   }, []);
 
-	return (
-		<div className='char-list'>
-			<ul className='char-grid'>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-				<li className='char-item'>
-					<img src={abyss} alt='abyss' />
-					<div className='char__name'>Abyss</div>
-				</li>
-			</ul>
-			<button className='button'>load more</button>
-		</div>
-	)
-}
+   const loadingView = loading ? <Loader /> : null;
+   const errorView = error ? <Error /> : null;
+   const charInfoView = !(loading || error)
+      ? charList.map((item) => (
+           <CharListItem
+              key={item.id || item.name}
+              name={item.name}
+              thumbnail={item.thumbnail}
+           />
+        ))
+      : null;
+   
+   return (
+      <div className='char-list'>
+         {loadingView}
+
+         <ul className='char-grid'>
+            {errorView}
+            {charInfoView}
+         </ul>
+         <button className='button'>load more</button>
+      </div>
+   );
+};

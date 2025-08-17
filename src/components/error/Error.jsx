@@ -1,16 +1,13 @@
-const Error = () => {
-	return (
-		<div style={{margin: 'auto'}}>
-			<iframe
-				src='https://gifer.com/embed/1FA'
-				width={400}
-				height={180}
-				frameBorder='0'
-				allowFullScreen
-				title='GIF from Gifer'
-			/>
-		</div>
-	)
-}
+import error from './error.png'
+import './error.css'
 
-export default Error
+const Error = () => {
+   return (
+      <>
+         <img className={'img-error'}src={error} alt='error' />
+      </>
+   );
+};
+
+export default Error;
+
