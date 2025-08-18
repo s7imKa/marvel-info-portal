@@ -14,6 +14,7 @@
 }
 
 .char--info img {
+	object-fit: cover;
 	width: 150px;
 }
 

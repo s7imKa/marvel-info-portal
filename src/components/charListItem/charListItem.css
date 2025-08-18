@@ -1,45 +1,69 @@
 .char-item {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   background-color: #1f1f1fb5;
-   overflow: hidden;
-   border-radius: 3px;
-   border: 2px solid rgba(0, 0, 0, 0.6);
-   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-   transition:
-      border 0.4s ease,
-      transform 0.4s ease,
-      box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1f1f1fb5;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 2px solid rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition:
+        border 0.4s ease,
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+    cursor: pointer; /* ✅ показати що елемент клікабельний */
 }
 
 .char-item:hover {
-   transform: translateY(-8px);
-   border: 2px solid var(--marvel-red);
-   box-shadow: 0 15px 15px rgba(159, 0, 19, 0.614);
-
+    transform: translateY(-8px);
+    border: 2px solid var(--marvel-red);
+    box-shadow: 0 0 15px var(--marvel-red);
 }
 
-.char-item:hover .char__name{
+/* ✅ АКТИВНИЙ КЛАС - коли персонаж обраний */
+.char-item-active {
+    border: 2px solid var(--marvel-red) !important; /* ✅ червона рамка */
+    transform: translateY(-4px) !important; /* ✅ трохи піднятий */
+    box-shadow: 0 0 20px rgba(236, 29, 36, 0.8) !important; /* ✅ червоне світіння */
+    background-color: rgba(236, 29, 36, 0.1); /* ✅ ледь червонуватий фон */
+}
+
+/* ✅ АКТИВНИЙ клас - назва персонажа */
+.char-item-active .char__name {
+    background: var(--marvel-red) !important; /* ✅ червоний фон назви */
+    color: #fff !important;
+}
+
+/* ✅ АКТИВНИЙ клас - картинка */
+.char-item-active img {
+    filter: brightness(1) contrast(1) !important; /* ✅ яскрава картинка */
+}
+
+.char-item:hover .char__name {
     background: var(--marvel-red);
 }
 
-
-
 .char-item img {
-   width: 200px;
-   height: 200px;
-   display: block;
-   object-fit: cover;
+    width: 200px;
+    height: 200px;
+    display: block;
+    object-fit: cover;
+    filter: brightness(0.8) contrast(1.1); /* ✅ затемнення картинки */
+    transition: filter 0.4s ease; /* ✅ плавний перехід */
+}
+
+/* ✅ При ховері картинка стає звичайною */
+.char-item:hover img {
+    filter: brightness(1) contrast(1); /* звичайна яскравість */
 }
 
 .char__name {
-   padding: 20px 40px 60px 80px;
-   font-weight: bold;
-   color: #fff;
-   text-align: left;
-   padding-left: 80px;
-   background: rgba(0, 0, 0, 0.6);
-   width: 100%;
-   transition: background 0.4s ease; 
+    padding: 20px 40px 60px 80px;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
+    padding-left: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    transition: background 0.4s ease;
 }

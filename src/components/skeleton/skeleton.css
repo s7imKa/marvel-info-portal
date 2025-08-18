@@ -1,0 +1,85 @@
+/* skeleton.css */
+
+/* Базова анімація skeleton */
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+.skeleton-img,
+.skeleton-title,
+.skeleton-button,
+.skeleton-line,
+.skeleton-comics-title,
+.skeleton-comics-item {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200px 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+/* Зображення персонажа */
+.skeleton-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+}
+
+/* Назва персонажа */
+.skeleton-title {
+    height: 32px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+/* Кнопки */
+.skeleton-button {
+    height: 45px;
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+/* Текст опису */
+.skeleton-text {
+    margin: 20px 0;
+}
+
+.skeleton-line {
+    height: 16px;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.skeleton-line-short {
+    width: 70%;
+}
+
+/* Заголовок коміксів */
+.skeleton-comics-title {
+    height: 24px;
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+/* Список коміксів */
+.skeleton-comics-item {
+    height: 20px;
+    width: 100%;
+    margin-bottom: 8px;
+    list-style: none;
+}
+
+/* Темна тема skeleton */
+.skeleton-img.dark,
+.skeleton-title.dark,
+.skeleton-button.dark,
+.skeleton-line.dark,
+.skeleton-comics-title.dark,
+.skeleton-comics-item.dark {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200px 100%;
+}

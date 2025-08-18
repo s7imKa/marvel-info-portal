@@ -43,7 +43,7 @@ class RandomChar extends Component {
    };
 
    updataChar = () => {
-      const max = 25;
+      const max = 22;
       const id = Math.floor(Math.random() * max) + 1; // випадковий id
 
       // Скидаємо error стан при новому запиті

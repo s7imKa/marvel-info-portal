@@ -1,16 +1,35 @@
+import { Component } from 'react'
+
+import CharInfo from '../charInfo/charInfo'
 import { CharList } from '../charList/CharList'
-import { CharInfo } from '../charInfo/charInfo'
 
 import bgChar from '../../assets/images/background/asset.png'
 
 import './sectionCharPanel.css'
 
-export default function SectionCharPanel() {
-	return (
-		<section className='section-char-panel'>
-			<CharList />
-			<CharInfo/>
-			<img className='bg-img' src={bgChar} alt="bgChar" />
-		</section>
-	)
+class SectionCharPanel extends Component {
+    state = {
+        selectedChar: null,
+    }
+
+    onSelectedChar = (id) => {
+        this.setState({
+            selectedChar: id,
+        })
+    }
+
+    render() {
+        return (
+            <section className='section-char-panel'>
+                <CharList
+                    onSelectedChar={this.onSelectedChar}
+                    selectedChar={this.state.selectedChar}
+                />
+                <CharInfo charId={this.state.selectedChar} />
+                <img className='bg-img' src={bgChar} alt='bgChar' />
+            </section>
+        )
+    }
 }
+
+export default SectionCharPanel
