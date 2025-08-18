@@ -73,6 +73,15 @@
     list-style: none;
 }
 
+.titel-err{
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+    color: black;
+    font-size: 18px;
+
+}
+
 /* Темна тема skeleton */
 .skeleton-img.dark,
 .skeleton-title.dark,
