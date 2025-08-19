@@ -12,6 +12,7 @@
         transform 0.4s ease,
         box-shadow 0.4s ease;
     cursor: pointer; /* ✅ показати що елемент клікабельний */
+    z-index: 3;
 }
 
 .char-item:hover {

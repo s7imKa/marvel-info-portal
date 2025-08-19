@@ -65,7 +65,6 @@ class CharInfo extends Component {
     render() {
         const { char, loader, error } = this.state
 
-
         const skeleton = !char && !loader && !error ? <Skeleton /> : null
         const errorView = error ? <Error /> : null
         const loaderView = loader ? <Loader /> : null
@@ -86,7 +85,7 @@ const ViewCharInfo = ({ char }) => {
     if (!char) {
         return
     }
-    const { name, description, thumbnail, homepage, wiki , comics} = char
+    const { name, description, thumbnail, homepage, wiki, comics } = char
     return (
         <>
             <div className='char--basics'>
@@ -113,11 +112,14 @@ const ViewCharInfo = ({ char }) => {
                 <h3>Comics: </h3>
             </div>
             <ul className='char-comics-list'>
-                {comics.map((item) => (
-                    <li key={item} className='char-comics-item'>
-                        {item}
-                    </li>
-                ))}
+                {comics.map((item, i) => {
+                    if (i > 9) return
+                    return (
+                        <li key={item} className='char-comics-item'>
+                            {item}
+                        </li>
+                    )
+                })}
             </ul>
         </>
     )

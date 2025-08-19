@@ -2,16 +2,29 @@
     margin-top: 30px;
     display: flex;
     position: relative;
-    overflow: hidden; /* приховати частини картинки що виходять за межі */
-    min-height: 600px; /* мінімальна висота для правильного позиціонування */
+    overflow: visible; /* ✅ ЗМІНИТИ: дозволити тіням виходити за межі */
+    min-height: 600px;
+    
 }
 
 .bg-img {
     position: absolute;
     bottom: 0;
-    right: -50px;
-    z-index: -1; /* змінив з -3 на -1 */
-    width: 400px; /* автоматична ширина */
-    object-fit: cover; /* правильне масштабування */
-    pointer-events: none; /* не перехоплює кліки */
+    right: -30px; /* ✅ ЗМІНИТИ: менше виступає */
+    z-index: -1;
+    width: 350px; /* ✅ ЗМЕНШИТИ: щоб поміщалася з новими відступами */
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0.1; /* ✅ ДОДАТИ: зробити напівпрозорою щоб не заважала */
+}
+
+@media (max-width: 768px) {
+    .section-char-panel {
+        padding: 0 10px; /* ✅ менші відступи на мобільному */
+    }
+
+    .bg-img {
+        width: 250px; /* ✅ менша картинка на мобільному */
+        right: -20px;
+    }
 }
