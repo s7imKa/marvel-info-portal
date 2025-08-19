@@ -70,8 +70,10 @@ class CharInfo extends Component {
         const loaderView = loader ? <Loader /> : null
         const contentView =
             char && !loader && !error ? <ViewCharInfo char={char} /> : null
+
+        const styleLoader = loader ? { textAlign: 'center', paddingTop: '25px' } : null
         return (
-            <div className='char--info'>
+            <div className='char--info' style={styleLoader}>
                 {skeleton}
                 {errorView}
                 {loaderView}
@@ -112,6 +114,7 @@ const ViewCharInfo = ({ char }) => {
                 <h3>Comics: </h3>
             </div>
             <ul className='char-comics-list'>
+                {comics ? null : 'Comics is not defained'}
                 {comics.map((item, i) => {
                     if (i > 9) return
                     return (
