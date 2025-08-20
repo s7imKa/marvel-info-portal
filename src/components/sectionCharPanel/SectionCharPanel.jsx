@@ -1,7 +1,8 @@
 import { Component } from 'react'
 
-import CharInfo from '../charInfo/charInfo'
+import CharInfo from '../charInfo/CharInfo'
 import { CharList } from '../charList/CharList'
+import ErrorBoundery from '../errorBoundery/errorBoundery'
 
 import bgChar from '../../assets/images/background/asset.png'
 
@@ -21,11 +22,17 @@ class SectionCharPanel extends Component {
     render() {
         return (
             <section className='section-char-panel'>
-                <CharList
-                    onSelectedChar={this.onSelectedChar}
-                    selectedChar={this.state.selectedChar}
-                />
-                <CharInfo charId={this.state.selectedChar} />
+                <ErrorBoundery>
+                    <CharList
+                        onSelectedChar={this.onSelectedChar}
+                        selectedChar={this.state.selectedChar}
+                    />
+                </ErrorBoundery>
+
+                <ErrorBoundery>
+                    <CharInfo charId={this.state.selectedChar} />
+                </ErrorBoundery>
+
                 <img className='bg-img' src={bgChar} alt='bgChar' />
             </section>
         )
