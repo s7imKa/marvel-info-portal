@@ -12,7 +12,8 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [newItemLoading, setNewItemLoading] = useState(false)
-    const [offset, setOffset] = useState(0) // ✅ ДОДАТИ: трекінг offset
+    const [offset, setOffset] = useState(1) // ✅ ДОДАТИ: трекінг offset
+    const [charEnd, setCharEnd] = useState(false)
 
     const marvelService = new MarvelService()
 
@@ -28,6 +29,10 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
         marvelService
             .getAllCharacters(offset)
             .then((characters) => {
+                if (characters.length < 9) {
+                    setCharEnd(true)
+                }
+
                 if (isNewItems) {
                     setCharList((prev) => [...prev, ...characters]) // ✅ ВИПРАВИТИ: розпакувати масив
                 } else {
@@ -85,6 +90,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
                     onClick={handleLoadMore}
                     disabled={newItemLoading} // ✅ ДОДАТИ: блокувати кнопку під час завантаження
                     style={{
+                        display: charEnd ? 'none' : 'block',
                         opacity: newItemLoading ? 0.6 : 1, // ✅ візуальна індикація
                         cursor: newItemLoading ? 'not-allowed' : 'pointer',
                     }}
