@@ -11,49 +11,88 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [charList, setCharList] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [newItemLoading, setNewItemLoading] = useState(false)
+    const [offset, setOffset] = useState(0) // ✅ ДОДАТИ: трекінг offset
+
+    const marvelService = new MarvelService()
+
+    const onRequest = (offset = 1, isNewItems = false) => {
+        // ✅ ВИПРАВИТИ: назва функції і параметри
+        if (isNewItems) {
+            setNewItemLoading(true) // тільки для нових елементів
+        } else {
+            setLoading(true) // для першого завантаження
+            setError(false)
+        }
+
+        marvelService
+            .getAllCharacters(offset)
+            .then((characters) => {
+                if (isNewItems) {
+                    setCharList((prev) => [...prev, ...characters]) // ✅ ВИПРАВИТИ: розпакувати масив
+                } else {
+                    setCharList(characters) // перше завантаження
+                }
+                setLoading(false)
+                setNewItemLoading(false)
+                setOffset(offset + 9) // ✅ ДОДАТИ: оновити offset (якщо API повертає 9 елементів)
+            })
+            .catch(() => {
+                setError(true)
+                setLoading(false)
+                setNewItemLoading(false)
+            })
+    }
 
     useEffect(() => {
-        const marvelService = new MarvelService()
-
-        const getChars = () => {
-            marvelService
-                .getAllCharacters()
-                .then((characters) => {
-                    setCharList(characters)
-                    setLoading(false)
-                })
-                .catch(() => {
-                    setError(true)
-                    setLoading(false)
-                })
-        }
-        getChars()
+        onRequest(1, false) // ✅ ВИПРАВИТИ: перше завантаження
     }, [])
 
-    const loadingView = loading ? <Loader /> : null
-    const errorView = error ? <Error /> : null
-    const charInfoView = !(loading || error)
-        ? charList.map((item) => (
-              <CharListItem
-                  id={item.id}
-                  key={item.id}
-                  name={item.name}
-                  thumbnail={item.thumbnail}
-                  onSelectedChar={onSelectedChar}
-                  selectedChar={selectedChar}
-              />
-          ))
-        : null
+    const handleLoadMore = () => {
+        // ✅ ДОДАТИ: функція для кнопки
+        onRequest(offset, true)
+    }
+
+    // ✅ ВИПРАВИТИ: умовний рендер
+    if (error) {
+        return (
+            <div className='char-list'>
+                <Error />
+            </div>
+        )
+    }
 
     return (
         <div className='char-list'>
-            {loadingView}
-
-            <ul className='char-grid'>
-                {errorView}
-                {charInfoView}
-            </ul>
-            <button className='button'>load more</button>
+            {loading && <Loader />} {/* ✅ тільки при першому завантаженні */}
+            {!loading && (
+                <ul className='char-grid'>
+                    {charList.map((item) => (
+                        <CharListItem
+                            id={item.id}
+                            key={item.id}
+                            name={item.name}
+                            thumbnail={item.thumbnail}
+                            onSelectedChar={onSelectedChar}
+                            selectedChar={selectedChar}
+                        />
+                    ))}
+                </ul>
+            )}
+            {!loading && (
+                <button
+                    className='button'
+                    onClick={handleLoadMore}
+                    disabled={newItemLoading} // ✅ ДОДАТИ: блокувати кнопку під час завантаження
+                    style={{
+                        opacity: newItemLoading ? 0.6 : 1, // ✅ візуальна індикація
+                        cursor: newItemLoading ? 'not-allowed' : 'pointer',
+                    }}
+                >
+                    {newItemLoading ? 'Loading...' : 'Load More'}{' '}
+                    {/* ✅ динамічний текст */}
+                </button>
+            )}
         </div>
     )
 }
