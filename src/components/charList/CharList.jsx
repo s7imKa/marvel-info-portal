@@ -1,11 +1,13 @@
-import MarvelService from '../../services/MarvelService'
-import CharListItem from '../charListItem/CharListItem'
-import Error from '../error/Error'
-import Loader from '../loader/Loader'
+import { useEffect, useState } from 'react';
 
-import { useEffect, useState } from 'react'
+import MarvelService from '../../services/MarvelService';
 
-import './charList.css'
+import CharListItem from '../charListItem/CharListItem';
+import Error from '../error/Error';
+import Loader from '../loader/Loader';
+
+import './charList.css';
+
 
 export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [charList, setCharList] = useState([])
@@ -102,3 +104,4 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
         </div>
     )
 }
+

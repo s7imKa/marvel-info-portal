@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 import './charListItem.css'
 
 const CharListItem = ({ id, name, thumbnail, onSelectedChar, selectedChar }) => {
@@ -9,4 +11,10 @@ const CharListItem = ({ id, name, thumbnail, onSelectedChar, selectedChar }) => 
         </li>
     )
 }
+
+CharListItem.PropTypes = {
+    onSelectedChar: PropTypes.func.isRequired,
+    selectedChar: PropTypes.number.
+}
+
 export default CharListItem
