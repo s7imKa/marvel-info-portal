@@ -14,7 +14,7 @@ const CharListItem = ({ id, name, thumbnail, onSelectedChar, selectedChar }) => 
 
 CharListItem.PropTypes = {
     onSelectedChar: PropTypes.func.isRequired,
-    selectedChar: PropTypes.number.
+    selectedChar: PropTypes.number
 }
 
 export default CharListItem
