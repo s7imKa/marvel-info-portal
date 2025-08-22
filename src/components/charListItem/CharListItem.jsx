@@ -24,10 +24,10 @@ class CharListItem extends Component {
             <li
                 className={classActive}
                 onClick={() => onSelectedChar(id)}
-                onKeyDown={this.handleKeyDown} // ✅ підтримка клавіатури
-                tabIndex={0} // ✅ можна фокусувати через Tab
-                role='button' // ✅ семантична роль
-                aria-label={`Select character ${name}`} // ✅ доступність
+                onKeyDown={this.handleKeyDown} 
+                tabIndex={0}
+                role='button' 
+                aria-label={`Select character ${name}`} 
             >
                 <img src={thumbnail} alt={name} />
                 <div className='char__name'>{name}</div>
