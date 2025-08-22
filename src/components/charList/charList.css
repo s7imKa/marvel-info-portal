@@ -14,7 +14,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1.7rem;
-    padding: 10px;
     margin: 0;
     width: 100%;
     max-width: 800px;
