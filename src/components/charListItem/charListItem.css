@@ -11,7 +11,7 @@
         border 0.4s ease,
         transform 0.4s ease,
         box-shadow 0.4s ease;
-    cursor: pointer; /* ✅ показати що елемент клікабельний */
+    cursor: pointer;
     z-index: 3;
 }
 
@@ -21,23 +21,23 @@
     box-shadow: 0 0 15px var(--marvel-red);
 }
 
-/* ✅ АКТИВНИЙ КЛАС - коли персонаж обраний */
+/* Активний клас - коли персонаж обраний */
 .char-item-active {
-    border: 2px solid var(--marvel-red) !important; /* ✅ червона рамка */
-    transform: translateY(-4px) !important; /* ✅ трохи піднятий */
-    box-shadow: 0 0 20px rgba(236, 29, 36, 0.8) !important; /* ✅ червоне світіння */
-    background-color: rgba(236, 29, 36, 0.1); /* ✅ ледь червонуватий фон */
+    border: 2px solid var(--marvel-red) !important;
+    transform: translateY(-4px) !important;
+    box-shadow: 0 0 20px rgba(236, 29, 36, 0.8) !important;
+    background-color: rgba(236, 29, 36, 0.1);
 }
 
-/* ✅ АКТИВНИЙ клас - назва персонажа */
+/* Активний клас - назва персонажа */
 .char-item-active .char__name {
-    background: var(--marvel-red) !important; /* ✅ червоний фон назви */
+    background: var(--marvel-red) !important;
     color: #fff !important;
 }
 
-/* ✅ АКТИВНИЙ клас - картинка */
+/* Активний клас - картинка */
 .char-item-active img {
-    filter: brightness(1) contrast(1) !important; /* ✅ яскрава картинка */
+    filter: brightness(1) contrast(1) !important;
 }
 
 .char-item:hover .char__name {
@@ -49,23 +49,70 @@
     height: 200px;
     display: block;
     object-fit: cover;
-    filter: brightness(0.8) contrast(1.1); /* ✅ затемнення картинки */
-    transition: filter 0.4s ease; /* ✅ плавний перехід */
+    filter: brightness(0.8) contrast(1.1);
+    transition: filter 0.4s ease;
 }
 
-/* ✅ При ховері картинка стає звичайною */
+/* При ховері картинка стає звичайною */
 .char-item:hover img {
-    filter: brightness(1) contrast(1); /* звичайна яскравість */
+    filter: brightness(1) contrast(1);
 }
 
 .char__name {
-    padding: 20px 50px 50px 50px;
+    padding: 20px 10px 50px 10px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     text-transform: uppercase;
     color: #fff;
     text-align: left;
     background: rgba(0, 0, 0, 0.6);
     width: 100%;
     transition: background 0.4s ease;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .char-item img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .char__name {
+        padding: 15px 20px 30px 20px;
+        font-size: 16px;
+    }
+
+    .char-item:hover {
+        transform: translateY(-4px);
+    }
+
+    .char-item-active {
+        transform: translateY(-2px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .char-item img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .char__name {
+        padding: 10px 15px 20px 15px;
+        font-size: 14px;
+    }
+
+    .char-item:hover {
+        transform: translateY(-2px);
+    }
+
+    .char-item-active {
+        transform: translateY(-1px) !important;
+    }
+}
+
+/* Фокус для клавіатурної навігації */
+.char-item:focus {
+    outline: 2px solid var(--marvel-red);
+    outline-offset: 2px;
 }

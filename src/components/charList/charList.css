@@ -5,8 +5,8 @@
     align-items: center;
     gap: 1.5rem;
     z-index: 1;
-    overflow: visible; /* ✅ ДОДАТИ: дозволити виходити за межі */
-    padding: 20px 0; /* ✅ ДОДАТИ: відступи зверху/знизу для hover ефекту */
+    overflow: visible;
+    padding: 20px 0;
 }
 
 .char-grid {
@@ -14,9 +14,88 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1.7rem;
-    padding: 10px; /* ✅ ДОДАТИ: внутрішні відступи для hover ефекту */
+    padding: 10px;
     margin: 0;
     width: 100%;
     max-width: 800px;
-    overflow: visible; /* ✅ ДОДАТИ: дозволити картинкам виходити за межі */
+    overflow: visible;
+}
+
+.load-more-btn {
+    background-color: var(--marvel-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.load-more-btn:hover {
+    background-color: var(--marvel-red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.load-more-btn:active {
+    transform: translateY(0);
+}
+
+.load-more-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Адаптивність */
+@media (max-width: 1024px) {
+    .char-list {
+        width: 55%;
+        padding: 15px 0;
+    }
+
+    .char-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1.5rem;
+        max-width: 700px;
+    }
+}
+
+@media (max-width: 768px) {
+    .char-list {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .char-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 1.2rem;
+        padding: 0;
+    }
+
+    .load-more-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .char-list {
+        padding: 10px;
+        gap: 1rem;
+    }
+
+    .char-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+
+    .load-more-btn {
+        width: 100%;
+        padding: 12px;
+    }
 }

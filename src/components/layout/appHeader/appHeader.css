@@ -1,62 +1,136 @@
 .app-header {
-	position: relative;
-	height: 120px;
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: auto;
+    position: relative;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .header-logo {
-	text-decoration: none;
-	font-size: 24px;
-	font-weight: 700;
-	color: black;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 700;
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.header-logo:hover {
+    color: var(--marvel-red);
 }
 
 .header-logo a {
-	text-decoration: none;
-	color: inherit;
+    text-decoration: none;
+    color: inherit;
 }
 
 .header-logo a span {
-	color: var(--marvel-red);
+    color: var(--marvel-red);
 }
 
 .header-menu {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .header-menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	gap: 20px;
-	font-size: 18px;
-	font-weight: 600;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .header-menu li {
-	margin: 0;
+    margin: 0;
 }
 
 .header-menu a {
-	text-decoration: none;
-	color: inherit;
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .header-menu a:visited {
-	color: inherit;
+    color: inherit;
 }
 
 .header-menu a:hover {
-	text-decoration: none;
+    background-color: rgba(236, 29, 36, 0.1);
+    color: var(--marvel-red);
 }
 
-.active {
-	color: var(--marvel-red) !important;
+.header-menu a.active {
+    color: var(--marvel-red) !important;
+    font-weight: 700;
+}
+
+/* Підкреслення для активного пункту */
+.header-menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background-color: var(--marvel-red);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .app-header {
+        height: 80px;
+        padding: 0 15px;
+        flex-wrap: wrap;
+    }
+
+    .header-logo {
+        font-size: 20px;
+        order: 1;
+    }
+
+    .header-menu {
+        order: 2;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .header-menu ul {
+        gap: 15px;
+        font-size: 16px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-header {
+        height: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .header-logo {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .header-menu ul {
+        gap: 10px;
+        font-size: 14px;
+        flex-wrap: wrap;
+    }
+
+    .header-menu a {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
 }
