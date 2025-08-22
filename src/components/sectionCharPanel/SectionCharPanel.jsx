@@ -2,7 +2,7 @@ import { Component } from 'react'
 
 import CharInfo from '../charInfo/CharInfo'
 import { CharList } from '../charList/CharList'
-import ErrorBoundery from '../errorBoundery/errorBoundery'
+import ErrorBoundery from '../errorBoundery/ErrorBoundery'
 
 import bgChar from '../../assets/images/background/asset.png'
 
