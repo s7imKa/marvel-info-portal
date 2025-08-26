@@ -1,88 +1,64 @@
-import { Component } from 'react'
-import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
 
-import MarvelService from '../../services/MarvelService'
 import Error from '../error/Error'
 import Loader from '../loader/Loader'
 import Skeleton from '../skeleton/Skeleton'
 
+import MarvelService from '../../services/MarvelService'
+
 import './charInfo.css'
 
-class CharInfo extends Component {
-    constructor(props) {
-        super(props)
-    }
+const CharInfo = ({ charId }) => {
+    const [char, setChar] = useState(null)
+    const [loader, setLodear] = useState(false)
+    const [error, setError] = useState(false)
 
-    state = {
-        char: null, // дані персонажа
-        loader: false, // стан завантаження
-        error: false,
-    }
+    const marvelService = new MarvelService() // сервіс Marvel API
 
-    marvelService = new MarvelService() // сервіс Marvel API
-
-    componentDidMount() {
-        this.updateChar()
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.charId !== prevProps.charId) {
-            this.updateChar()
-        }
-    }
-
-    updateChar = () => {
-        const { charId } = this.props
+    const updateChar = () => {
         if (!charId) {
             return
         }
 
         // Скидаємо error стан при новому запиті
-        this.setState({
-            loader: true,
-            error: false,
-        })
+        setLodear(true)
+        setError(false)
 
-        this.marvelService
+        marvelService
             .getCharacters(charId)
-            .then((res) => this.onCharLoaded(res))
-            .catch(() => this.onError())
+            .then((res) => onCharLoaded(res))
+            .catch(() => onError())
     }
 
-    onCharLoaded = (char) => {
-        this.setState({
-            char: char, // зберігаємо персонажа
-            loader: false, // вимикаємо loader
-            error: false, // ВАЖЛИВО: скидаємо помилку при успішному завантаженні
-        })
+    useEffect(() => {
+        updateChar()
+    }, [charId])
+
+    const onCharLoaded = (char) => {
+        setChar(char)
+        setLodear(false)
+        setError(false)
     }
 
-    onError = () => {
-        this.setState({
-            error: true,
-            loader: false,
-        })
+    const onError = () => {
+        setError(true)
+        setLodear(false)
     }
 
-    render() {
-        const { char, loader, error } = this.state
+    const skeleton = !char && !loader && !error ? <Skeleton /> : null
+    const errorView = error ? <Error /> : null
+    const loaderView = loader ? <Loader /> : null
+    const contentView = char && !loader && !error ? <ViewCharInfo char={char} /> : null
+    const styleLoader = loader ? { textAlign: 'center', paddingTop: '25px' } : null
 
-        const skeleton = !char && !loader && !error ? <Skeleton /> : null
-        const errorView = error ? <Error /> : null
-        const loaderView = loader ? <Loader /> : null
-        const contentView =
-            char && !loader && !error ? <ViewCharInfo char={char} /> : null
-
-        const styleLoader = loader ? { textAlign: 'center', paddingTop: '25px' } : null
-        return (
-            <div className='char--info' style={styleLoader}>
-                {skeleton}
-                {errorView}
-                {loaderView}
-                {contentView}
-            </div>
-        )
-    }
+    return (
+        <div className='char--info' style={styleLoader}>
+            {skeleton}
+            {errorView}
+            {loaderView}
+            {contentView}
+        </div>
+    )
 }
 
 const ViewCharInfo = ({ char }) => {
