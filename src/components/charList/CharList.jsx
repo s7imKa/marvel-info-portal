@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import MarvelService from '../../services/MarvelService';
+import MarvelService from '../../services/MarvelService'
 
-import CharListItem from '../charListItem/CharListItem';
-import Error from '../error/Error';
-import Loader from '../loader/Loader';
+import CharListItem from '../charListItem/CharListItem'
+import Error from '../error/Error'
+import Loader from '../loader/Loader'
 
-import './charList.css';
-
+import './charList.css'
 
 export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [charList, setCharList] = useState([])
@@ -17,9 +16,9 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [offset, setOffset] = useState(1) // ✅ ДОДАТИ: трекінг offset
     const [charEnd, setCharEnd] = useState(false)
 
-    const marvelService = new MarvelService()
+    const marvelService = useMemo(() => new MarvelService(), [])
 
-    const onRequest = (offset = 1, isNewItems = false) => {
+    const onRequest = useCallback((offset = 1, isNewItems = false) => {
         // ✅ ВИПРАВИТИ: назва функції і параметри
         if (isNewItems) {
             setNewItemLoading(true) // тільки для нових елементів
@@ -49,14 +48,13 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
                 setLoading(false)
                 setNewItemLoading(false)
             })
-    }
+    }, [marvelService]) 
 
     useEffect(() => {
         onRequest(1, false) // ✅ ВИПРАВИТИ: перше завантаження
-    }, [])
+    }, [marvelService, onRequest])
 
     const handleLoadMore = () => {
-        // ✅ ДОДАТИ: функція для кнопки
         onRequest(offset, true)
     }
 
@@ -71,7 +69,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
 
     return (
         <div className='char-list'>
-            {loading && <Loader />} 
+            {loading && <Loader />}
             {!loading && (
                 <ul className='char-grid'>
                     {charList.map((item) => (
@@ -104,4 +102,3 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
         </div>
     )
 }
-

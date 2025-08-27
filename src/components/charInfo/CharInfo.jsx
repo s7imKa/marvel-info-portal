@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import Error from '../error/Error'
 import Loader from '../loader/Loader'
@@ -13,26 +13,26 @@ const CharInfo = ({ charId }) => {
     const [loader, setLodear] = useState(false)
     const [error, setError] = useState(false)
 
-    const marvelService = new MarvelService() // сервіс Marvel API
-
-    const updateChar = () => {
-        if (!charId) {
-            return
-        }
-
-        // Скидаємо error стан при новому запиті
-        setLodear(true)
-        setError(false)
-
-        marvelService
-            .getCharacters(charId)
-            .then((res) => onCharLoaded(res))
-            .catch(() => onError())
-    }
+    const marvelService = useMemo(() => new MarvelService(), [])
 
     useEffect(() => {
+        const updateChar = () => {
+            if (!charId) {
+                return
+            }
+
+            // Скидаємо error стан при новому запиті
+            setLodear(true)
+            setError(false)
+
+            marvelService
+                .getCharacters(charId)
+                .then((res) => onCharLoaded(res))
+                .catch(() => onError())
+        }
+
         updateChar()
-    }, [charId])
+    }, [charId, marvelService])
 
     const onCharLoaded = (char) => {
         setChar(char)
