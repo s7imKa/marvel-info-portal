@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { useState } from 'react'
 
 import CharInfo from '../charInfo/CharInfo'
 import { CharList } from '../charList/CharList'
@@ -8,35 +8,26 @@ import bgChar from '../../assets/images/background/asset.png'
 
 import './sectionCharPanel.css'
 
-class SectionCharPanel extends Component {
-    state = {
-        selectedChar: null,
+const SectionCharPanel = () => {
+    const [selectedChar, setSelectedChar] = useState(null)
+
+    const onSelectedChar = id => {
+        setSelectedChar(id)
     }
 
-    onSelectedChar = (id) => {
-        this.setState({
-            selectedChar: id,
-        })
-    }
+    return (
+        <section className='section-char-panel'>
+            <ErrorBoundery>
+                <CharList onSelectedChar={onSelectedChar} selectedChar={selectedChar} />
+            </ErrorBoundery>
 
-    render() {
-        return (
-            <section className='section-char-panel'>
-                <ErrorBoundery>
-                    <CharList
-                        onSelectedChar={this.onSelectedChar}
-                        selectedChar={this.state.selectedChar}
-                    />
-                </ErrorBoundery>
+            <ErrorBoundery>
+                <CharInfo charId={selectedChar} />
+            </ErrorBoundery>
 
-                <ErrorBoundery>
-                    <CharInfo charId={this.state.selectedChar} />
-                </ErrorBoundery>
-
-                <img className='bg-img' src={bgChar} alt='bgChar' />
-            </section>
-        )
-    }
+            <img className='bg-img' src={bgChar} alt='bgChar' />
+        </section>
+    )
 }
 
 export default SectionCharPanel
