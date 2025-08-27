@@ -71,7 +71,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
 
     return (
         <div className='char-list'>
-            {loading && <Loader />} {/* ✅ тільки при першому завантаженні */}
+            {loading && <Loader />} 
             {!loading && (
                 <ul className='char-grid'>
                     {charList.map((item) => (

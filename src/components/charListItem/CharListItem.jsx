@@ -1,39 +1,32 @@
-import { Component } from 'react'
-
 import PropTypes from 'prop-types'
 
 import './charListItem.css'
 
-class CharListItem extends Component {
-    constructor(props) {
-        super(props)
-    }
-
-    handleKeyDown = (e) => {
+const CharListItem = ({ id, name, thumbnail, onSelectedChar, selectedChar }) => {
+    const handleKeyDown = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()
-            this.props.onSelectedChar(this.props.id)
+            onSelectedChar(id)
         }
     }
-    render() {
-        const { id, name, thumbnail, onSelectedChar, selectedChar } = this.props
-        const classActive =
-            selectedChar === id ? 'char-item char-item-active' : 'char-item'
 
-        return (
-            <li
-                className={classActive}
-                onClick={() => onSelectedChar(id)}
-                onKeyDown={this.handleKeyDown} 
-                tabIndex={0}
-                role='button' 
-                aria-label={`Select character ${name}`} 
-            >
-                <img src={thumbnail} alt={name} />
-                <div className='char__name'>{name}</div>
-            </li>
-        )
-    }
+    const classActive = selectedChar === id
+        ? 'char-item char-item-active'
+        : 'char-item'
+
+    return (
+        <li
+            className={classActive}
+            onClick={() => onSelectedChar(id)}
+            onKeyDown={handleKeyDown}
+            tabIndex={0}
+            role='button'
+            aria-label={`Select character ${name}`}
+        >
+            <img src={thumbnail} alt={name} />
+            <div className='char__name'>{name}</div>
+        </li>
+    )
 }
 
 CharListItem.PropTypes = {
