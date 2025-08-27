@@ -18,37 +18,28 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
 
     const marvelService = useMemo(() => new MarvelService(), [])
 
-    const onRequest = useCallback((offset = 1, isNewItems = false) => {
-        // ✅ ВИПРАВИТИ: назва функції і параметри
-        if (isNewItems) {
-            setNewItemLoading(true) // тільки для нових елементів
-        } else {
-            setLoading(true) // для першого завантаження
-            setError(false)
-        }
+    const onRequest = useCallback(
+        (offset = 1, isNewItems = false) => {
+            // ✅ ВИПРАВИТИ: назва функції і параметри
+            if (isNewItems) {
+                setNewItemLoading(true) // тільки для нових елементів
+            } else {
+                setLoading(true) // для першого завантаження
+                setError(false)
+            }
 
-        marvelService
-            .getAllCharacters(offset)
-            .then((characters) => {
-                if (characters.length < 9) {
-                    setCharEnd(true)
-                }
-
-                if (isNewItems) {
-                    setCharList((prev) => [...prev, ...characters]) // ✅ ВИПРАВИТИ: розпакувати масив
-                } else {
-                    setCharList(characters) // перше завантаження
-                }
-                setLoading(false)
-                setNewItemLoading(false)
-                setOffset(offset + 9) // ✅ ДОДАТИ: оновити offset (якщо API повертає 9 елементів)
-            })
-            .catch(() => {
-                setError(true)
-                setLoading(false)
-                setNewItemLoading(false)
-            })
-    }, [marvelService]) 
+            marvelService
+                .getAllCharacters(offset)
+                .then(characters => setCharLoaded(characters, isNewItems))
+                .catch(() => {
+                    setError(true)
+                    setLoading(false)
+                    setNewItemLoading(false)
+                })
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [marvelService],
+    )
 
     useEffect(() => {
         onRequest(1, false) // ✅ ВИПРАВИТИ: перше завантаження
@@ -56,6 +47,21 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
 
     const handleLoadMore = () => {
         onRequest(offset, true)
+    }
+
+    const setCharLoaded = (chars, isNewItems) => {
+        if (chars.length < 9) {
+            setCharEnd(true)
+        }
+
+        if (isNewItems) {
+            setCharList(prev => [...prev, ...chars])
+        } else {
+            setCharList(chars) // перше завантаження
+        }
+        setLoading(false)
+        setNewItemLoading(false)
+        setOffset(offset + 9) // ✅ ДОДАТИ: оновити offset (якщо API повертає 9 елементів)
     }
 
     // ✅ ВИПРАВИТИ: умовний рендер
@@ -72,7 +78,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
             {loading && <Loader />}
             {!loading && (
                 <ul className='char-grid'>
-                    {charList.map((item) => (
+                    {charList.map(item => (
                         <CharListItem
                             id={item.id}
                             key={item.id}
@@ -91,7 +97,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
                     disabled={newItemLoading} // ✅ ДОДАТИ: блокувати кнопку під час завантаження
                     style={{
                         display: charEnd ? 'none' : 'block',
-                        opacity: newItemLoading ? 0.6 : 1, // ✅ візуальна індикація
+                        opacity: newItemLoading ? 0.6 : 1,
                         cursor: newItemLoading ? 'not-allowed' : 'pointer',
                     }}
                 >
