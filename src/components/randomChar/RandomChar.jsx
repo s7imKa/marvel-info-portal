@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import mjolnir from '../../assets/images/img-char-random-section/mjolnir.png'
 import shield from '../../assets/images/img-char-random-section/shield.png'
@@ -10,91 +10,74 @@ import Loader from '../loader/Loader'
 import '../../assets/styles/button.css'
 import './randomChar.css'
 
-class RandomChar extends Component {
-    constructor(props) {
-        super(props)
-    }
+const RandomChar = () => {
+    const [char, setChar] = useState(null)
+    const [loader, setLoader] = useState(true)
+    const [error, setError] = useState(false)
 
-    state = {
-        char: {}, // дані персонажа
-        loader: true, // стан завантаження
-        error: false,
-    }
+    const marvelService = useMemo(() => new MarvelService(), [])
 
-    marvelService = new MarvelService() // сервіс Marvel API
-
-    componentDidMount() {
-        this.updataChar()
-    }
-
-    onCharLoaded = (char) => {
-        this.setState({
-            char: char, // зберігаємо персонажа
-            loader: false, // вимикаємо loader
-            error: false, // ВАЖЛИВО: скидаємо помилку при успішному завантаженні
-        })
-    }
-
-    onError = () => {
-        this.setState({
-            error: true,
-            loader: false,
-        })
-    }
-
-    updataChar = () => {
-        const max = 22
+    const updataChar = useCallback(() => {
+        const max = 21
         const id = Math.floor(Math.random() * max) + 1 // випадковий id
-
         // Скидаємо error стан при новому запиті
-        this.setState({
-            loader: true,
-            error: false,
-        })
+        setLoader(true)
+        setError(false)
 
-        this.marvelService
+        marvelService
             .getCharacters(id)
-            .then((res) => this.onCharLoaded(res))
-            .catch(this.onError)
+            .then((res) => onCharLoaded(res))
+            .catch(onError)
+    }, [marvelService])
+
+    useEffect(() => {
+        updataChar()
+    }, [marvelService, updataChar])
+
+    const onCharLoaded = (char) => {
+        setChar(char)
+        setLoader(false)
+        setError(false)
     }
 
-    render() {
-        const { char, loader, error } = this.state
-        const errorView = error ? <Error /> : null
-        const loaderView = loader ? <Loader /> : null
-        const contentView = !(loader || error) ? <Char char={char} /> : null
+    const onError = () => {
+        setError(true)
+        setLoader(false)
+    }
 
-        return (
-            <section className='random-char-section'>
-                <div className='char-info'>
-                    {errorView}
-                    {loaderView}
-                    {contentView}
-                </div>
-                <div className='char-random'>
-                    <img className='mjolnir' src={mjolnir} alt='mjolnir' />{' '}
-                    {/* картинка */}
-                    <img className='shield' src={shield} alt='shield' /> {/* картинка */}
-                    <div className='char-random-content'>
-                        <h1>
-                            Random character for today! <br />
-                            Do you want to get to know him better?
-                        </h1>
-                        <div className='button-random-car'>
-                            <h1>Or choose another one</h1>
-                            <button
-                                className='button'
-                                onClick={this.updataChar}
-                                disabled={loader}
-                            >
-                                {loader ? 'LOADING...' : 'TRY IT'}
-                            </button>
-                        </div>
+    const errorView = error ? <Error /> : null
+    const loaderView = loader ? <Loader /> : null
+    const contentView = !(loader || error) ? <Char char={char} /> : null
+
+    return (
+        <section className='random-char-section'>
+            <div className='char-info'>
+                {errorView}
+                {loaderView}
+                {contentView}
+            </div>
+            <div className='char-random'>
+                <img className='mjolnir' src={mjolnir} alt='mjolnir' /> 
+                <img className='shield' src={shield} alt='shield' /> 
+                <div className='char-random-content'>
+                    <h1>
+                        Random character for today! <br />
+                        Do you want to get to know him better?
+                    </h1>
+                    <div className='button-random-car'>
+                        <h1>Or choose another one</h1>
+                        <button
+                            className='button'
+                            onClick={updataChar}
+                            disabled={loader}
+                        >
+                            {loader ? 'LOADING...' : 'TRY IT'}
+                        </button>
                     </div>
                 </div>
-            </section>
-        )
-    }
+            </div>
+        </section>
+    )
 }
 
 const Char = ({ char }) => {
