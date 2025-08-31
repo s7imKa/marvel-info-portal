@@ -13,7 +13,7 @@ import './randomChar.css'
 const RandomChar = () => {
     const [char, setChar] = useState(null)
 
-    const { loading, error, getCharacters } = useMarvelService()
+    const { loading, error, getCharacters, setError } = useMarvelService()
 
     const updataChar = useCallback(() => {
         const max = 25
@@ -21,6 +21,7 @@ const RandomChar = () => {
 
         getCharacters(id)
             .then(res => onCharLoaded(res))
+            .catch(() => setError(true))
     }, [])
 
     useEffect(() => {

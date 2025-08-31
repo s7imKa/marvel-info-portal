@@ -1,7 +1,7 @@
 import { useHttp } from '../hooks/http.hook'
 
 const useMarvelService = () => {
-    const { loading, request, error, clearError, setError} = useHttp()
+    const { loading, request, error, clearError , setError} = useHttp()
     const _apiBase = 'https://marvel-server-zeta.vercel.app/'
     const _apiKey = 'apikey=d4eecb0c66dedbfae4eab45d312fc1df'
     const _baseOffset = 1
@@ -16,11 +16,11 @@ const useMarvelService = () => {
 const getCharacters = async id => {
     const res = await request(`${_apiBase}characters/${id}?${_apiKey}`)
     if (!res.data || !res.data.results || res.data.results.length === 0) {
-        setError(true)
-        console.log(new Error('Character not found'))
-    } else {
-        return _transformCharacters(res.data.results[0])
+        throw new Error('Character not found')
+        
     }
+    return _transformCharacters(res.data.results[0])
+
     
 }
 
@@ -47,6 +47,7 @@ const getCharacters = async id => {
         loading,
         error,
         clearError,
+        setError
     }
 }
 
