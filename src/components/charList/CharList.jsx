@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import MarvelService from '../../services/MarvelService'
+import useMarvelService from '../../services/MarvelService'
 
 import CharListItem from '../charListItem/CharListItem'
 import Error from '../error/Error'
@@ -10,39 +10,28 @@ import './charList.css'
 
 export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [charList, setCharList] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
     const [newItemLoading, setNewItemLoading] = useState(false)
     const [offset, setOffset] = useState(0) // ✅ ДОДАТИ: трекінг offset
     const [charEnd, setCharEnd] = useState(false)
 
-    const marvelService = useMemo(() => MarvelService(), [])
+    const { loading, error, getAllCharacters } = useMarvelService()
 
     const onRequest = (offset = 0, isNewItems = false) => {
-        // ✅ ВИПРАВИТИ: назва функції і параметри
-        if (isNewItems) {
-            setNewItemLoading(true) // тільки для нових елементів
-        } else {
-            setLoading(true) // для першого завантаження
-            setError(false)
-        }
+        isNewItems ? setNewItemLoading(false) : setNewItemLoading(true) // тільки для нових елементів
 
-        marvelService
-            .getAllCharacters(offset)
+        getAllCharacters(offset)
             .then(characters => setCharLoaded(characters, isNewItems))
             .catch(() => {
-                setError(true)
-                setLoading(false)
                 setNewItemLoading(false)
             })
     }
 
     useEffect(() => {
-        onRequest(0, false) // ✅ ВИПРАВИТИ: перше завантаження
-    }, [marvelService])
+        onRequest(0, true) // ✅ ВИПРАВИТИ: перше завантаження
+    }, [])
 
     const handleLoadMore = () => {
-        onRequest(offset, true)
+        onRequest(offset, false)
     }
 
     const setCharLoaded = (chars, isNewItems) => {
@@ -50,12 +39,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
             setCharEnd(true)
         }
 
-        if (isNewItems) {
-            setCharList(prev => [...prev, ...chars])
-        } else {
-            setCharList(chars) // перше завантаження
-        }
-        setLoading(false)
+        isNewItems ? setCharList(chars) : setCharList(prev => [...prev, ...chars])
         setNewItemLoading(false)
         setOffset(offset + 9)
     }
@@ -71,21 +55,19 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
 
     return (
         <div className='char-list'>
-            {loading && <Loader />}
-            {!loading && (
-                <ul className='char-grid'>
-                    {charList.map(item => (
-                        <CharListItem
-                            id={item.id}
-                            key={item.id}
-                            name={item.name}
-                            thumbnail={item.thumbnail}
-                            onSelectedChar={onSelectedChar}
-                            selectedChar={selectedChar}
-                        />
-                    ))}
-                </ul>
-            )}
+            {loading && !newItemLoading && <Loader />}
+            <ul className='char-grid'>
+                {charList.map(item => (
+                    <CharListItem
+                        id={item.id}
+                        key={item.id}
+                        name={item.name}
+                        thumbnail={item.thumbnail}
+                        onSelectedChar={onSelectedChar}
+                        selectedChar={selectedChar}
+                    />
+                ))}
+            </ul>
             {!loading && (
                 <button
                     className='button'

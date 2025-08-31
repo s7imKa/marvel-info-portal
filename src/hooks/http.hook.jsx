@@ -6,10 +6,13 @@ export const useHttp = () => {
 
     const request = useCallback(async url => {
         setLoading(true)
-
         try {
             const response = await fetch(url)
+            console.log('[HTTP RESPONSE]', response.status)
             if (!response.ok) {
+                console.error(
+                    `[HTTP ERROR] cloud not fetch ${url}, status: ${response.status}`,
+                )
                 throw new Error(`cloud not fetch ${url}, status: ${response.status}`)
             }
             const data = await response.json()
@@ -18,6 +21,7 @@ export const useHttp = () => {
         } catch (e) {
             setLoading(false)
             setError(e.message)
+            console.error('[HTTP CATCH ERROR]', e)
             throw e
         }
     }, [])

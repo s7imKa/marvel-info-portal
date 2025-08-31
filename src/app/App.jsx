@@ -21,7 +21,7 @@ const App = () => {
                 {pagesNav === 'Characters' && (
                     <>
                         <RandomChar />
-                        {/* <SectionCharPanel /> */}
+                        <SectionCharPanel />
                     </>
                 )}
                 {pagesNav === 'Comics' && <SectionComicsPanel />}

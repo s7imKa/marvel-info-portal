@@ -15,18 +15,17 @@ const RandomChar = () => {
 
     const { loading, error, getCharacters, setError } = useMarvelService()
 
-    const updataChar = useCallback(() => {
-        const max = 25
+    const updataChar = () => {
+        const max = 20
         const id = Math.floor(Math.random() * max) + 1
 
         getCharacters(id)
             .then(res => onCharLoaded(res))
-            .catch(() => setError(true))
-    }, [])
+    }
 
     useEffect(() => {
         updataChar()
-    }, [updataChar])
+    }, [])
 
     const onCharLoaded = char => {
         setChar(char)
