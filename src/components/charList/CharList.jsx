@@ -16,8 +16,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [offset, setOffset] = useState(0) // ✅ ДОДАТИ: трекінг offset
     const [charEnd, setCharEnd] = useState(false)
 
-    const marvelService = useMemo(() => new MarvelService(), [])
-    console.log(offset)
+    const marvelService = useMemo(() => MarvelService(), [])
 
     const onRequest = (offset = 0, isNewItems = false) => {
         // ✅ ВИПРАВИТИ: назва функції і параметри

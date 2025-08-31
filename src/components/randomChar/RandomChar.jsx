@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import mjolnir from '../../assets/images/img-char-random-section/mjolnir.png'
 import shield from '../../assets/images/img-char-random-section/shield.png'
 
-import MarvelService from '../../services/MarvelService'
+import useMarvelService from '../../services/MarvelService'
 import Error from '../error/Error'
 import Loader from '../loader/Loader'
 
@@ -12,42 +12,28 @@ import './randomChar.css'
 
 const RandomChar = () => {
     const [char, setChar] = useState(null)
-    const [loader, setLoader] = useState(true)
-    const [error, setError] = useState(false)
 
-    const marvelService = useMemo(() => new MarvelService(), [])
+    const { loading, error, getCharacters } = useMarvelService()
 
     const updataChar = useCallback(() => {
-        const max = 21
-        const id = Math.floor(Math.random() * max) + 1 // випадковий id
-        // Скидаємо error стан при новому запиті
-        setLoader(true)
-        setError(false)
+        const max = 25
+        const id = Math.floor(Math.random() * max) + 1
 
-        marvelService
-            .getCharacters(id)
-            .then((res) => onCharLoaded(res))
-            .catch(onError)
-    }, [marvelService])
+        getCharacters(id)
+            .then(res => onCharLoaded(res))
+    }, [])
 
     useEffect(() => {
         updataChar()
-    }, [marvelService, updataChar])
+    }, [updataChar])
 
-    const onCharLoaded = (char) => {
+    const onCharLoaded = char => {
         setChar(char)
-        setLoader(false)
-        setError(false)
-    }
-
-    const onError = () => {
-        setError(true)
-        setLoader(false)
     }
 
     const errorView = error ? <Error /> : null
-    const loaderView = loader ? <Loader /> : null
-    const contentView = !(loader || error) ? <Char char={char} /> : null
+    const loaderView = loading ? <Loader /> : null
+    const contentView = !(loading || error) ? <Char char={char} /> : null
 
     return (
         <section className='random-char-section'>
@@ -57,8 +43,8 @@ const RandomChar = () => {
                 {contentView}
             </div>
             <div className='char-random'>
-                <img className='mjolnir' src={mjolnir} alt='mjolnir' /> 
-                <img className='shield' src={shield} alt='shield' /> 
+                <img className='mjolnir' src={mjolnir} alt='mjolnir' />
+                <img className='shield' src={shield} alt='shield' />
                 <div className='char-random-content'>
                     <h1>
                         Random character for today! <br />
@@ -69,9 +55,9 @@ const RandomChar = () => {
                         <button
                             className='button'
                             onClick={updataChar}
-                            disabled={loader}
+                            disabled={loading}
                         >
-                            {loader ? 'LOADING...' : 'TRY IT'}
+                            {loading ? 'LOADING...' : 'TRY IT'}
                         </button>
                     </div>
                 </div>
@@ -81,6 +67,8 @@ const RandomChar = () => {
 }
 
 const Char = ({ char }) => {
+    if (!char) return null // захист від null
+
     const { name, description, thumbnail, homepage, wiki } = char // деструктуризація
 
     return (
