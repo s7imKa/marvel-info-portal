@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import MarvelService from '../../services/MarvelService'
 
@@ -13,37 +13,34 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [newItemLoading, setNewItemLoading] = useState(false)
-    const [offset, setOffset] = useState(1) // ✅ ДОДАТИ: трекінг offset
+    const [offset, setOffset] = useState(0) // ✅ ДОДАТИ: трекінг offset
     const [charEnd, setCharEnd] = useState(false)
 
     const marvelService = useMemo(() => new MarvelService(), [])
+    console.log(offset)
 
-    const onRequest = useCallback(
-        (offset = 1, isNewItems = false) => {
-            // ✅ ВИПРАВИТИ: назва функції і параметри
-            if (isNewItems) {
-                setNewItemLoading(true) // тільки для нових елементів
-            } else {
-                setLoading(true) // для першого завантаження
-                setError(false)
-            }
+    const onRequest = (offset = 0, isNewItems = false) => {
+        // ✅ ВИПРАВИТИ: назва функції і параметри
+        if (isNewItems) {
+            setNewItemLoading(true) // тільки для нових елементів
+        } else {
+            setLoading(true) // для першого завантаження
+            setError(false)
+        }
 
-            marvelService
-                .getAllCharacters(offset)
-                .then(characters => setCharLoaded(characters, isNewItems))
-                .catch(() => {
-                    setError(true)
-                    setLoading(false)
-                    setNewItemLoading(false)
-                })
-        },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [marvelService],
-    )
+        marvelService
+            .getAllCharacters(offset)
+            .then(characters => setCharLoaded(characters, isNewItems))
+            .catch(() => {
+                setError(true)
+                setLoading(false)
+                setNewItemLoading(false)
+            })
+    }
 
     useEffect(() => {
-        onRequest(1, false) // ✅ ВИПРАВИТИ: перше завантаження
-    }, [marvelService, onRequest])
+        onRequest(0, false) // ✅ ВИПРАВИТИ: перше завантаження
+    }, [marvelService])
 
     const handleLoadMore = () => {
         onRequest(offset, true)
@@ -61,7 +58,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
         }
         setLoading(false)
         setNewItemLoading(false)
-        setOffset(offset + 9) // ✅ ДОДАТИ: оновити offset (якщо API повертає 9 елементів)
+        setOffset(offset + 9)
     }
 
     // ✅ ВИПРАВИТИ: умовний рендер
