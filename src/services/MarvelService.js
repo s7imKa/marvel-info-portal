@@ -4,11 +4,11 @@ const useMarvelService = () => {
     const { loading, request, error, clearError, setError } = useHttp()
     const _apiBase = 'https://marvel-server-zeta.vercel.app/'
     const _apiKey = 'apikey=d4eecb0c66dedbfae4eab45d312fc1df'
-    const _baseOffset = 1
+    const _baseOffset = 0
 
     const getAllCharacters = async (offset = _baseOffset) => {
         const res = await request(
-            `${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`,
+            `${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`
         )
         return res.data.results.map(CharacterData => _transformCharacters(CharacterData))
     }
@@ -19,6 +19,11 @@ const useMarvelService = () => {
             throw new Error('Character not found')
         }
         return _transformCharacters(res.data.results[0])
+    }
+
+    const getAllComics = async (offset = _baseOffset) => {
+        const res = await request(`${_apiBase}comics?limit=8&offset=${offset}&${_apiKey}`)
+        return res.data.results.map(ComicsData => _transformComics(ComicsData))
     }
 
     const _transformCharacters = char => {
@@ -38,9 +43,26 @@ const useMarvelService = () => {
         }
     }
 
+    const _transformComics = comics => {
+        const description =
+            comics.description && comics.description.length >= 100
+                ? comics.description.slice(0, 200) + '...'
+                : comics.description || 'not description'
+        return {
+            id: comics.id,
+            title: comics.title,
+            description: description,
+            pageCount: comics.pageCount,
+            thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
+            textObjects: comics.textObjects.languages,
+            price: comics.prices[0].price,
+        }
+    }
+
     return {
         getAllCharacters,
         getCharacters,
+        getAllComics,
         loading,
         error,
         clearError,

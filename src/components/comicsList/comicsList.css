@@ -1,8 +1,10 @@
+/* Comics List Styles */
 .comics-list {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 1.5rem;
+	padding-bottom:  50px;
 }
 
 .comics-grid {
@@ -10,37 +12,8 @@
 	list-style: none;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 4rem;
+	gap: 2rem;
 	width: 100%;
 	padding: 0;
-}
-
-.comics-item {
-	color: black;
-	display: flex;
-	flex-direction: column;
-	align-items: left;
-	overflow: hidden;
-	border-radius: 3px;
-}
-
-.comics-item img {
-	width: 100%;
-	height: auto;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.197);
-	transition:
-		transform 0.4s ease
-}
-
-.comics-item img:hover {
-	transform: translateY(-5px);
-}
-.comics-item h1 {
-	margin: 10px 0;
-	font-size: 14px;
-}
-.comics-item h2 {
-	color: var(--button-grey);
-	margin: 0;
-	font-size: 14px;
+	margin-left: 0; /* Додано для reset списку */
 }

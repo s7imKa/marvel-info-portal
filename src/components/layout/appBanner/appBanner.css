@@ -1,3 +1,5 @@
+
+/* Banner Styles */
 .banner {
 	width: 100%;
 	height: 100px;
@@ -5,22 +7,65 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding: 0; /* Додано явно */
+	box-sizing: border-box; /* Додано для кращого контролю розмірів */
 }
 
 .banner-content {
 	display: flex;
+	align-items: center; /* Додано для вирівнювання по центру */
 }
 
 .banner-content h1 {
+	color: white;
 	font-size: 24px;
 	margin-left: 60px;
+	margin-top: 0; /* Додано для reset margins */
+	margin-bottom: 0; /* Додано для reset margins */
 }
 
 .avangard {
 	height: 100%;
 	padding-left: 30px;
+	display: flex; /* Додано для кращого контролю layout */
+	align-items: center; /* Додано для вирівнювання по центру */
 }
 
 .avangardLogo {
 	padding-right: 30px;
+	height: auto; /* Додано для responsive зображень */
+	max-height: 80px; /* Додано обмеження висоти */
+}
+
+/* Додаткові покращення для responsive дизайну */
+@media (max-width: 768px) {
+	.comics-grid {
+		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+		gap: 1rem;
+		margin-top: 30px;
+	}
+	
+	.banner-content h1 {
+		font-size: 20px;
+		margin-left: 20px;
+	}
+	
+	.avangard {
+		padding-left: 15px;
+	}
+	
+	.avangardLogo {
+		padding-right: 15px;
+	}
+}
+
+@media (max-width: 480px) {
+	.comics-grid {
+		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+	}
+	
+	.banner-content h1 {
+		font-size: 18px;
+		margin-left: 15px;
+	}
 }
