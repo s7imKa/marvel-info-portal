@@ -94,6 +94,7 @@
     background-color: #e9ecef;
 }
 
+
 /* Адаптивність */
 @media (max-width: 1024px) {
     .char--info {
@@ -115,7 +116,7 @@
     }
 
     .char--basics {
-        flex-direction: column;
+        flex-direction: row;
         height: auto;
         gap: 15px;
     }
@@ -128,13 +129,15 @@
     }
 
     .char--info-content {
-        text-align: center;
+        margin: 0;
+        display: block;
+        padding-top: 10px;
+        text-align: start;
     }
 
     .char-btns {
-        flex-direction: row;
-        justify-content: center;
-        gap: 15px;
+        margin: 0;
+        gap: 0;
     }
 }
 
@@ -154,21 +157,6 @@
 
     .char-btns {
         flex-direction: column;
-        gap: 10px;
     }
 }
 
-/* Стани завантаження */
-.char--info-loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-}
-
-.char--info-placeholder {
-    text-align: center;
-    color: #666;
-    font-style: italic;
-    padding: 40px;
-}

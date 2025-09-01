@@ -15,7 +15,7 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1.7rem;
     margin: 0;
-    padding: 0;
+    padding-left: 0;
     width: 100%;
     max-width: 800px;
     overflow: visible;
@@ -53,14 +53,14 @@
 /* Адаптивність */
 @media (max-width: 1024px) {
     .char-list {
-        width: 55%;
+        width: 80%;
         padding: 15px 0;
     }
 
     .char-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 1.5rem;
-        max-width: 700px;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 1.2rem;
+        max-width: 600px;
     }
 }
 
@@ -68,34 +68,47 @@
     .char-list {
         width: 100%;
         margin-left: 0;
-        padding: 15px;
+        padding: 12px 4vw;
+        gap: 1.2rem;
     }
 
     .char-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 1.2rem;
-        padding: 0;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 1rem;
+        max-width: 100%;
     }
 
     .load-more-btn {
-        padding: 10px 20px;
-        font-size: 14px;
+        padding: 10px 16px;
+        font-size: 13px;
     }
 }
 
 @media (max-width: 480px) {
     .char-list {
-        padding: 10px;
-        gap: 1rem;
+        padding: 6px 2vw;
+        gap: 0.7rem;
     }
 
     .char-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
     }
 
     .load-more-btn {
         width: 100%;
-        padding: 12px;
+        padding: 10px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+}
+
+@media (max-width: 350px) {
+    .char-grid {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+    .char-list {
+        padding: 6px 0;
     }
 }

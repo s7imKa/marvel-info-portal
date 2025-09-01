@@ -8,7 +8,7 @@ import SectionComicsPanel from '../components/sectionComicsPanel/SectionComicsPa
 import './App.css'
 
 const App = () => {
-    const [pagesNav, setPagesNav] = useState('Comics')
+    const [pagesNav, setPagesNav] = useState('Characters')
 
     const changePage = (value) => {
         setPagesNav(value)

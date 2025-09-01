@@ -1,19 +1,39 @@
 /* Comics List Styles */
 .comics-list {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 1.5rem;
-	padding-bottom:  50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 50px;
 }
 
 .comics-grid {
-	margin-top: 50px;
-	list-style: none;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: 2rem;
-	width: 100%;
-	padding: 0;
-	margin-left: 0; /* Додано для reset списку */
+    margin-top: 50px;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    padding: 0;
+    margin-left: 0;
+}
+
+/* Адаптивність */
+@media (max-width: 900px) {
+    .comics-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .comics-list {
+        gap: 1rem;
+        padding-bottom: 20px;
+    }
+    .comics-grid {
+        margin-top: 20px;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }

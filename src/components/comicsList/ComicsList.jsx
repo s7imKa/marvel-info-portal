@@ -6,7 +6,7 @@ import Error from '../error/Error'
 import Loader from '../loader/Loader'
 import './comicsList.css'
 
-export const ComicsList = () => {
+export const ComicsList = ({ onInfoComics }) => {
     const [comics, setComics] = useState([])
     const [offset, setOffset] = useState(0) // ✅ ДОДАТИ: трекінг offset
     const [charEnd, setCharEnd] = useState(false)
@@ -56,6 +56,7 @@ export const ComicsList = () => {
                         title={item.title}
                         thumbnail={item.thumbnail}
                         price={item.price}
+                        onClick={onInfoComics}
                     />
                 ))}
             </ul>

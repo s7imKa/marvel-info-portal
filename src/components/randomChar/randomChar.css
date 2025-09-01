@@ -115,9 +115,7 @@
 /* Адаптивність */
 @media (max-width: 1024px) {
     .random-char-section {
-        height: auto;
-        min-height: 250px;
-        margin-top: 50px;
+        margin: 0 auto;
     }
 
     .char-info,
@@ -161,7 +159,11 @@
     }
 
     .char-random-content h1 {
-        font-size: 22px;
+        font-size: 14px;
+    }
+
+    .char-random-content {
+        text-align: center;
     }
 
     .button-char-info {
@@ -180,6 +182,10 @@
     .char-info,
     .char-random {
         padding: 15px;
+    }
+    .random-char-section {
+        margin: 0 auto;
+        width: 90%;
     }
 
     .char-info {
