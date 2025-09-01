@@ -6,21 +6,24 @@ import './sectionComicsPanel.css'
 
 const SectionComicsPanel = () => {
     const [viewInfoComics, setViewInfoComics] = useState(false)
-
-    const onInfoComics = () => {
+    const [idComicsInfo, setIdComicsInfo] = useState(null)
+    const onInfoComics = id => {
         setViewInfoComics(true)
-	}
-	const onInfoAllComics = () => {
+        setIdComicsInfo(id)
+    }
+    const onInfoAllComics = () => {
         setViewInfoComics(false)
     }
-	
 
     return (
         <section className='section-comics-panel'>
             <AppBanner />
 
             {viewInfoComics ? (
-                <InfoComicsCard onInfoAllComics={onInfoAllComics} />
+                <InfoComicsCard
+                    idComicsInfo={idComicsInfo}
+                    onInfoAllComics={onInfoAllComics}
+                />
             ) : (
                 <ComicsList onInfoComics={onInfoComics} />
             )}

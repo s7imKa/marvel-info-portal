@@ -53,6 +53,7 @@ export const ComicsList = ({ onInfoComics }) => {
                 {comics.map(item => (
                     <ComicsListItem
                         key={item.id}
+                        id={item.id}
                         title={item.title}
                         thumbnail={item.thumbnail}
                         price={item.price}

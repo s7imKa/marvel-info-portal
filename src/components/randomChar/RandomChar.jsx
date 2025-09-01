@@ -18,7 +18,7 @@ const RandomChar = () => {
     const updataChar = () => {
         clearError()
 
-        const max = 25
+        const max = 21
         const id = Math.floor(Math.random() * max) + 1
 
         getCharacters(id)

@@ -1,15 +1,48 @@
-import comics from '../../assets/images/comics/x-men.png'
+import { useEffect, useState } from 'react'
+import useMarvelService from '../../services/MarvelService'
+import Error from '../error/Error'
+import Loader from '../loader/Loader'
 
 import './InfoComicsCard.css'
 
-export default function InfoComicsCard({ onInfoAllComics }) {
+export default function InfoComicsCard({ onInfoAllComics, idComicsInfo }) {
+    const [comicsData, setComicsData] = useState(null)
+
+    const { loading, error, getComics } = useMarvelService()
+
+    const setComicsInfo = comics => {
+        setComicsData(comics)
+    }
+    useEffect(() => {
+        getComics(idComicsInfo).then(res => setComicsInfo(res))
+    }, [])
+
+    const viewLoading = loading ? <Loader /> : null
+    const viewError = error ? <Error /> : null
+    const viewInfo =
+        comicsData && !error && !loading ? (
+            <CardInfo
+                onInfoAllComics={onInfoAllComics}
+                comicsData={comicsData}
+                setComicsInfo={setComicsInfo}
+            />
+        ) : null
+
     return (
         <section className='info-comics-section'>
-            <img
-                src={comics}
-                alt='X-Men: Days of Future Past'
-                className='info-comics-img'
-            />
+            {viewLoading}
+            {viewError}
+            {viewInfo}
+        </section>
+    )
+}
+
+const CardInfo = ({ onInfoAllComics, comicsData, setComicsInfo }) => {
+    const { thumbnail, title, description, pageCount, textObjects, price } = comicsData
+
+    return (
+        <>
+            <img src={thumbnail} alt={title} className='info-comics-img' />
             <div className='info-comics-content'>
                 <a
                     href='#'
@@ -17,22 +50,17 @@ export default function InfoComicsCard({ onInfoAllComics }) {
                     onClick={e => {
                         e.preventDefault()
                         onInfoAllComics()
+                        setComicsInfo(null)
                     }}
                 >
                     Back to all
                 </a>
-                <h2 className='info-comics-title'>X-Men: Days of Future Past</h2>
-                <p className='info-comics-desc'>
-                    Re-live the legendary first journey into the dystopian future of 2013
-                    - where Sentinels stalk the Earth, and the X-Men are humanity's only
-                    hope...until they die! Also featuring the first appearance of Alpha
-                    Flight, the return of the Wendigo, the history of the X-Men from
-                    Cyclops himself...and a demon for Christmas!?
-                </p>
-                <div className='info-comics-pages'>144 pages</div>
-                <div className='info-comics-lang'>Language: en-us</div>
-                <div className='info-comics-price'>9.99$</div>
+                <h2 className='info-comics-title'>{title}</h2>
+                <p className='info-comics-desc'>{description}</p>
+                <div className='info-comics-pages'>{pageCount} pages</div>
+                <div className='info-comics-lang'> Language: {textObjects}</div>
+                <div className='info-comics-price'>{price}$</div>
             </div>
-        </section>
+        </>
     )
 }

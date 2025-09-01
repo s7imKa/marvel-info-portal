@@ -1,11 +1,11 @@
-import ClipLoader from 'react-spinners/ClipLoader'
+import BarLoader from 'react-spinners/BarLoader'
 
 import './loader.css'
 
 export default function Loader() {
 	return (
-		<div className='flex justify-center items-center h-40'>
-			<ClipLoader color='#d73636ff' size={100} />
-		</div>
-	)
+        <div className='flex justify-center items-center h-40'>
+            <BarLoader color='#ff1010' speedMultiplier={3} />
+        </div>
+    )
 }
