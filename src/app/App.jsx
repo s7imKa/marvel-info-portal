@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import AppHeader from '../components/layout/appHeader/AppHeader'
 import RandomChar from '../components/randomChar/RandomChar'
@@ -11,7 +11,7 @@ const App = () => {
 
 
     return (
-        <BrowserRouter>
+        <Router>
             <div className='app'>
                 <AppHeader />
                 <main>
@@ -36,7 +36,7 @@ const App = () => {
                     </Routes>
                 </main>
             </div>
-        </BrowserRouter>
+        </Router>
     )
 }
 
