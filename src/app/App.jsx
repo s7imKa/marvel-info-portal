@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import AppHeader from '../components/layout/appHeader/AppHeader'
 import RandomChar from '../components/randomChar/RandomChar'
@@ -8,25 +8,35 @@ import SectionComicsPanel from '../components/sectionComicsPanel/SectionComicsPa
 import './App.css'
 
 const App = () => {
-    const [pagesNav, setPagesNav] = useState('Characters')
 
-    const changePage = (value) => {
-        setPagesNav(value)
-    }
 
     return (
-        <div className='app'>
-            <AppHeader changePage={changePage} stateButton={pagesNav} />
-            <main>
-                {pagesNav === 'Characters' && (
-                    <>
-                        <RandomChar />
-                        <SectionCharPanel />
-                    </>
-                )}
-                {pagesNav === 'Comics' && <SectionComicsPanel />}
-            </main>
-        </div>
+        <BrowserRouter>
+            <div className='app'>
+                <AppHeader />
+                <main>
+                    <Routes>
+                        <Route
+                            path='/comics'
+                            element={
+                                <>
+                                    <SectionComicsPanel />
+                                </>
+                            }
+                        />
+                        <Route
+                            path='/'
+                            element={
+                                <>
+                                    <RandomChar />
+                                    <SectionCharPanel />
+                                </>
+                            }
+                        />
+                    </Routes>
+                </main>
+            </div>
+        </BrowserRouter>
     )
 }
 
