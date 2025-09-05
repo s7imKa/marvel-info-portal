@@ -88,12 +88,28 @@
     border-left: 3px solid var(--marvel-red);
     font-size: 13px;
     line-height: 1.3;
+    cursor: pointer;
+}
+
+.char-comics-item a {
+    color: var(--marvel-red);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.char-comics-item a:hover {
+    color: #000000;
+    text-decoration: underline;
 }
 
 .char-comics-item:hover {
     background-color: #e9ecef;
+    box-shadow: 0 4px 8px rgba(215, 38, 61, 0.08);
 }
-
 
 /* Адаптивність */
 @media (max-width: 1024px) {
@@ -104,6 +120,11 @@
 
     .char--info-content h2 {
         font-size: 20px;
+    }
+
+    .char-comics-item {
+        font-size: 12px;
+        padding: 7px 10px;
     }
 }
 
@@ -139,6 +160,15 @@
         margin: 0;
         gap: 0;
     }
+
+    .char-comics-item {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+
+    .char-comics-item a {
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -158,5 +188,13 @@
     .char-btns {
         flex-direction: column;
     }
-}
 
+    .char-comics-item {
+        font-size: 11px;
+        padding: 5px 6px;
+    }
+
+    .char-comics-item a {
+        font-size: 11px;
+    }
+}
