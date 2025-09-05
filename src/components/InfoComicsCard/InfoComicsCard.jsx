@@ -10,17 +10,20 @@ import './InfoComicsCard.css'
 
 export default function InfoComicsCard() {
     const [comicsData, setComicsData] = useState(null)
+
     const idComicsInfo = useParams()
 
-    const { loading, error, getComics } = useMarvelService()
+    const { loading, error, getComics, clearError } = useMarvelService()
+
+    useEffect(() => {
+        clearError()
+        getComics(idComicsInfo.id).then(res => setComicsInfo(res))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const setComicsInfo = comics => {
         setComicsData(comics)
     }
-    useEffect(() => {
-        getComics(idComicsInfo.id).then(res => setComicsInfo(res))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
 
     const viewLoading = loading ? <Loader /> : null
     const viewError = error ? <Error /> : null

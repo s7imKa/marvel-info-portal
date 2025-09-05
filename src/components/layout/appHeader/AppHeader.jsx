@@ -16,7 +16,6 @@ export default function AppHeader() {
                     {pagesButton.map((item, index) => (
                         <li key={index}>
                             <NavLink
-                                end
                                 to={item === 'Characters' ? '/' : '/comics'}
                                 className={({ isActive }) => (isActive ? 'active' : '')}
                             >
