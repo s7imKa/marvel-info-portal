@@ -27,7 +27,7 @@ export const CharList = ({ onSelectedChar, selectedChar }) => {
     }
 
     useEffect(() => {
-        onRequest(1, true) // ✅ ВИПРАВИТИ: перше завантаження
+        onRequest(0, true) // ✅ ВИПРАВИТИ: перше завантаження
     }, [])
 
     const handleLoadMore = () => {

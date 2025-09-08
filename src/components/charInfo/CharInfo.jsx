@@ -28,6 +28,7 @@ const CharInfo = ({ charId }) => {
         }
 
         updateChar()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [charId])
 
     const arrComicsTitle = comics => {
