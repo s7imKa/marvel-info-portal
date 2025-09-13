@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 import mjolnir from '../../assets/images/img-char-random-section/mjolnir.png'
@@ -18,7 +20,7 @@ const RandomChar = () => {
     const updataChar = () => {
         clearError()
 
-        const max = 21
+        const max = 20
         const id = Math.floor(Math.random() * max) + 1
 
         getCharacters(id)
@@ -39,7 +41,13 @@ const RandomChar = () => {
     const contentView = !(loading || error) ? <Char char={char} /> : null
 
     return (
-        <section className='random-char-section'>
+        <motion.section
+            initial={{ opacity: 0, y: 50, scale: 0.8, rotate: -5 }} // знизу, менше та трохи повернене
+            animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }} // кінцевий стан: нормальний
+            exit={{ opacity: 0, y: -50, scale: 0.8, rotate: 5 }} // виліт вгору + трохи повернуто
+            transition={{ duration: 0.6, ease: 'easeInOut' }} // плавна анімація
+            className='random-char-section'
+        >
             <div className='char-info'>
                 {errorView}
                 {loaderView}
@@ -65,7 +73,7 @@ const RandomChar = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     )
 }
 

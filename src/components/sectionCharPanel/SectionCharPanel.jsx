@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 import CharInfo from '../charInfo/CharInfo'
@@ -16,7 +18,13 @@ const SectionCharPanel = () => {
     }
 
     return (
-        <section className='section-char-panel'>
+        <motion.section
+            initial={{ opacity: 0, y: 20, scale: 0.98 }} // трохи нижче та менше
+            animate={{ opacity: 1, y: 0, scale: 1 }} // нормальний стан
+            exit={{ opacity: 0, y: 10, scale: 0.98 }} // легкий підйом при виході
+            transition={{ duration: 0.5, ease: 'easeOut' }} // плавно, без різких ривків
+            className='section-char-panel'
+        >
             <ErrorBoundery>
                 <CharList onSelectedChar={onSelectedChar} selectedChar={selectedChar} />
             </ErrorBoundery>
@@ -26,7 +34,7 @@ const SectionCharPanel = () => {
             </ErrorBoundery>
 
             <img className='bg-img' src={bgChar} alt='bgChar' />
-        </section>
+        </motion.section>
     )
 }
 

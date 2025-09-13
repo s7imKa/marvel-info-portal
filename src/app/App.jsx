@@ -1,5 +1,6 @@
+import { AnimatePresence } from 'framer-motion'
 import React, { Suspense } from 'react'
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 import InfoComicsCard from '../components/InfoComicsCard/InfoComicsCard'
 import { AppBanner } from '../components/layout/appBanner/AppBanner'
@@ -18,12 +19,14 @@ const SectionComicsPanel = React.lazy(
 )
 
 const App = () => {
+    const location = useLocation()
+
     return (
-        <Router>
+        <AnimatePresence mode='wait'>
             <div className='app'>
                 <AppHeader />
                 <main>
-                    <Routes>
+                    <Routes location={location} key={location.pathname}>
                         <Route
                             path='/'
                             element={
@@ -36,7 +39,14 @@ const App = () => {
                             }
                         />
 
-                        <Route path='/comics' element={<SectionComicsPanel />} />
+                        <Route
+                            path='/comics'
+                            element={
+                                <Suspense fallback={<Loader />}>
+                                    <SectionComicsPanel />
+                                </Suspense>
+                            }
+                        />
                         <Route
                             path='/comics/:id'
                             element={
@@ -53,7 +63,7 @@ const App = () => {
                     </Routes>
                 </main>
             </div>
-        </Router>
+        </AnimatePresence>
     )
 }
 
