@@ -9,6 +9,7 @@ import Loader from '../loader/Loader'
 
 import { useParams } from 'react-router-dom'
 import '../InfoComicsCard/InfoComicsCard.css'
+import { AppBanner } from '../layout/appBanner/AppBanner'
 
 export default function InfoCharCard() {
     const [charData, setCharData] = useState(null)
@@ -33,17 +34,21 @@ export default function InfoCharCard() {
         charData && !error && !loading ? <CardInfo charData={charData} /> : null
 
     return (
-        <motion.section
-            className='info-comics-section'
-            initial={{ opacity: 0, y: 20, scale: 0.98 }} // трохи нижче та менше
-            animate={{ opacity: 1, y: 0, scale: 1 }} // нормальний стан
-            exit={{ opacity: 0, y: 10, scale: 0.98 }} // легкий підйом при виході
-            transition={{ duration: 0.5, ease: 'easeOut' }} // плавно, без різких ривків
-        >
-            {viewLoading}
-            {viewError}
-            {viewInfo}
-        </motion.section>
+        <>
+            <AppBanner />
+
+            <motion.section
+                className='info-comics-section'
+                initial={{ opacity: 0, y: 20, scale: 0.98 }} // трохи нижче та менше
+                animate={{ opacity: 1, y: 0, scale: 1 }} // нормальний стан
+                exit={{ opacity: 0, y: 10, scale: 0.98 }} // легкий підйом при виході
+                transition={{ duration: 0.5, ease: 'easeOut' }} // плавно, без різких ривків
+            >
+                {viewLoading}
+                {viewError}
+                {viewInfo}
+            </motion.section>
+        </>
     )
 }
 

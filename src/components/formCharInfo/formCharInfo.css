@@ -1,0 +1,46 @@
+.form-serach {
+    max-width: 400px;
+    margin: 32px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-serach label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-serach input[type='text'] {
+    padding: 10px 14px;
+    border: 1px solid var(--marvel-red);
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-serach input[type='text']:focus {
+    border-color: var(--marvel-red);
+    background: #f8f9fa;
+}
+
+.form-serach div {
+    color: var(--marvel-red);
+    font-size: 0.95rem;
+    margin-top: -8px;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 600px) {
+    .form-serach {
+        padding: 18px 8px;
+        max-width: 98vw;
+    }
+    .form-serach label,
+    .form-serach input[type='text'],
+    .form-serach button[type='submit'] {
+        font-size: 0.95rem;
+    }
+}

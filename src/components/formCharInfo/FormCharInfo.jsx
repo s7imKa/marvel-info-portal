@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import useMarvelService from '../../services/MarvelService'
 
 import './formCharInfo.css'
+import '../../assets/styles/button.css'
 
 const FormCharInfo = () => {
     const navigate = useNavigate()
@@ -19,7 +20,9 @@ const FormCharInfo = () => {
             item => item.name.toLowerCase() === value.search.toLowerCase(),
         )
         setResultFindChar(res[0])
-        navigate(`/char/${res[0].id}`)
+         if (res[0]) {
+             navigate(`/char/${res[0].id}`)
+         }
         
     }
 
@@ -39,14 +42,19 @@ const FormCharInfo = () => {
             onSubmit={values => searchChar(values)}
         >
             {({ errors, isSubmitting }) => (
-                <Form>
-                    <label htmlFor='text'>Введіть ім'я героя</label>
-                    <Field id='search' name='search' type='text' />
-                    {!resultFindChar && !errors.search? (
-                        <div>Героя не знайдено</div>
+                <Form className='form-serach'>
+                    <label htmlFor='text'>Or find a character by name:</label>
+                    <Field
+                        id='search'
+                        name='search'
+                        type='text'
+                        placeholder={'Enter name...'}
+                    />
+                    {!resultFindChar && !errors.search ? (
+                        <div>Героя не знайдено !</div>
                     ) : null}
                     <ErrorMessage name='search' component={'div'} />
-                    <button type='submit' disabled={isSubmitting}>
+                    <button className={'button'}type='submit' disabled={isSubmitting}>
                         Пошук
                     </button>
                 </Form>
