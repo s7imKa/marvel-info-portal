@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
 import useMarvelService from '../../services/MarvelService'
 import Error from '../error/Error'
 import Loader from '../loader/Loader'
@@ -52,6 +52,10 @@ const CardInfo = ({ comicsData }) => {
 
     return (
         <>
+            <Helmet>
+                <meta name='description' content={description} />
+                <title>{title}</title>
+            </Helmet>
             <img src={thumbnail} alt={title} className='info-comics-img' />
             <div className='info-comics-content'>
                 <Link to={'/comics'} className='info-comics-back'>
