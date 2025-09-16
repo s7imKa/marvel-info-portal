@@ -42,9 +42,9 @@ const RandomChar = () => {
 
     return (
         <motion.section
-            initial={{ opacity: 0, y: 50, scale: 0.8, rotate: -5 }} // знизу, менше та трохи повернене
+            initial={{ opacity: 0, y: 5, scale: 0.9, rotate: -1 }} // знизу, менше та трохи повернене
             animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }} // кінцевий стан: нормальний
-            exit={{ opacity: 0, y: -50, scale: 0.8, rotate: 5 }} // виліт вгору + трохи повернуто
+            exit={{ opacity: 0, y: -10, scale: 0.8, rotate: 5 }} // виліт вгору + трохи повернуто
             transition={{ duration: 0.6, ease: 'easeInOut' }} // плавна анімація
             className='random-char-section'
         >

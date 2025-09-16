@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import Error from '../error/Error'
 import Loader from '../loader/Loader'
 import Skeleton from '../skeleton/Skeleton'
+import FormCharInfo from '../formCharInfo/FormCharInfo'
+
 
 import useMarvelService from '../../services/MarvelService'
 
@@ -69,7 +71,7 @@ const ViewCharInfo = ({ char, arrTitle }) => {
     const { name, description, thumbnail, homepage, wiki, comics } = char
 
     return (
-        <>
+        <div>
             <div className='char--basics'>
                 <img src={thumbnail} alt='abyss' />
                 <div className='char--info-content'>
@@ -111,7 +113,10 @@ const ViewCharInfo = ({ char, arrTitle }) => {
                       })
                     : null}
             </ul>
-        </>
+            
+            <FormCharInfo/>
+
+        </div>
     )
 }
 

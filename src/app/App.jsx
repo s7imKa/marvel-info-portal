@@ -3,6 +3,7 @@ import React, { Suspense } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 import InfoComicsCard from '../components/InfoComicsCard/InfoComicsCard'
+import InfoCharCard from '../components/InfoCharCard/InfoCharCard'
 import { AppBanner } from '../components/layout/appBanner/AppBanner'
 import AppHeader from '../components/layout/appHeader/AppHeader'
 import Loader from '../components/loader/Loader'
@@ -37,6 +38,17 @@ const App = () => {
                                     </Suspense>
                                 </>
                             }
+                        />
+                        <Route
+                            path='/char/:id'
+                            element={
+                                <>
+                                    <Suspense fallback={<Loader />}>
+                                        <InfoCharCard/>
+                                    </Suspense>
+                                </>
+                            }
+                        
                         />
 
                         <Route
